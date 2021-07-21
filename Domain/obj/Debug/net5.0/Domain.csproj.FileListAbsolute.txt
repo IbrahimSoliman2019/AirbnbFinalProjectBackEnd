@@ -1,0 +1,12 @@
+F:\airbnb project\Backend\Domain\bin\Debug\net5.0\Domain.deps.json
+F:\airbnb project\Backend\Domain\bin\Debug\net5.0\Domain.dll
+F:\airbnb project\Backend\Domain\bin\Debug\net5.0\ref\Domain.dll
+F:\airbnb project\Backend\Domain\bin\Debug\net5.0\Domain.pdb
+F:\airbnb project\Backend\Domain\obj\Debug\net5.0\Domain.csproj.AssemblyReference.cache
+F:\airbnb project\Backend\Domain\obj\Debug\net5.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+F:\airbnb project\Backend\Domain\obj\Debug\net5.0\Domain.AssemblyInfoInputs.cache
+F:\airbnb project\Backend\Domain\obj\Debug\net5.0\Domain.AssemblyInfo.cs
+F:\airbnb project\Backend\Domain\obj\Debug\net5.0\Domain.csproj.CoreCompileInputs.cache
+F:\airbnb project\Backend\Domain\obj\Debug\net5.0\Domain.dll
+F:\airbnb project\Backend\Domain\obj\Debug\net5.0\ref\Domain.dll
+F:\airbnb project\Backend\Domain\obj\Debug\net5.0\Domain.pdb
