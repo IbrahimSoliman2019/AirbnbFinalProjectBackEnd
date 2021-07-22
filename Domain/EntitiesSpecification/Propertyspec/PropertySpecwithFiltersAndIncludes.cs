@@ -1,10 +1,10 @@
 using System;
 using Domain.Entities;
-using Domain.Specification;
+using Domain.Specfication;
 
 namespace Domain.EntitiesSpecification.Propertyspec
 {
-    public class PropertySpecwithFiltersAndIncludes : BaseSpecification<property>
+    public class PropertySpecwithFiltersAndIncludes : Specification<property>
     {
         public PropertySpecwithFiltersAndIncludes(PropertySpecParams propertySpecParams) : 
         base(new PropertySpecCriteria(propertySpecParams).CreateCriteria())

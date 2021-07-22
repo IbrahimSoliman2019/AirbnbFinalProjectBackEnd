@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Domain.Entities;
-using Domain.Specification;
+using Domain.Specfication;
 
 namespace Domain.Interfaces
 {
@@ -10,9 +10,9 @@ namespace Domain.Interfaces
     {
         Task<T> GetByIDAsync(int id);
         Task<IReadOnlyList<T>> GetAllAsync();
-        Task<T> GetBySpecAsync(ISpecification<T> spec);
-        Task<IReadOnlyList<T>> GetAllBySpecAsync(ISpecification<T> spec);
-        Task<int> CountAsync(ISpecification<T> spec);
+        Task<T> GetBySpecAsync(ISpecifecation<T> spec);
+        Task<IReadOnlyList<T>> GetAllBySpecAsync(ISpecifecation<T> spec);
+        Task<int> CountAsync(ISpecifecation<T> spec);
 
 
     }

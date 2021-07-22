@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\airbnb project\\Backend\\api\\Api.csproj": {}
+    "F:\\airbnb project\\Backend\\Api\\Api.csproj": {}
   },
   "projects": {
-    "F:\\airbnb project\\Backend\\api\\Api.csproj": {
+    "F:\\airbnb project\\Backend\\Api\\Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\airbnb project\\Backend\\api\\Api.csproj",
+        "projectUniqueName": "F:\\airbnb project\\Backend\\Api\\Api.csproj",
         "projectName": "Api",
-        "projectPath": "F:\\airbnb project\\Backend\\api\\Api.csproj",
+        "projectPath": "F:\\airbnb project\\Backend\\Api\\Api.csproj",
         "packagesPath": "C:\\Users\\eng ebraheem\\.nuget\\packages\\",
-        "outputPath": "F:\\airbnb project\\Backend\\api\\obj\\",
+        "outputPath": "F:\\airbnb project\\Backend\\Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\eng ebraheem\\AppData\\Roaming\\NuGet\\NuGet.Config",

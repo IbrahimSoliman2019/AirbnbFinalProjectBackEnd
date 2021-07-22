@@ -1,10 +1,10 @@
 using System;
 using Domain.Entities;
-using Domain.Specification;
+using Domain.Specfication;
 
 namespace Domain.EntitiesSpecification.Statespec
 {
-    public class StateSpecWithIncludesAndFilters : BaseSpecification<state>
+    public class StateSpecWithIncludesAndFilters : Specification<state>
     {
         public StateSpecWithIncludesAndFilters(StateSpecParams specParams) : base(new StateParamsCriteria(specParams).GetCriteria())
         {

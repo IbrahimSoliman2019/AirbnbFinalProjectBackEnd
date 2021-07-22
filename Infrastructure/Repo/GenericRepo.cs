@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Domain.Entities;
 using Domain.Interfaces;
-using Domain.Specification;
+using Domain.Specfication;
 using Infrastructure.Data;
 using Infrastructure.SpecificationEvaluators;
 using Microsoft.EntityFrameworkCore;
@@ -27,21 +27,21 @@ namespace Infrastructure.Repo
         {
            return await  _context.Set<T>().FindAsync(id);
         }
-        public async Task<IReadOnlyList<T>> GetAllBySpecAsync(ISpecification<T> spec)
+        public async Task<IReadOnlyList<T>> GetAllBySpecAsync(ISpecifecation<T> spec)
         {
             return await ApplyingSpec(spec).ToListAsync();
         }
 
-        public async Task<T> GetBySpecAsync(ISpecification<T> spec)
+        public async Task<T> GetBySpecAsync(ISpecifecation<T> spec)
         {
             return await ApplyingSpec(spec).FirstOrDefaultAsync();
         }
 
-        public async Task<int> CountAsync(ISpecification<T> spec)
+        public async Task<int> CountAsync(ISpecifecation<T> spec)
         {
             return await ApplyingSpec(spec).CountAsync();
         }
-        private IQueryable<T> ApplyingSpec(ISpecification<T> spec){
+        private IQueryable<T> ApplyingSpec(ISpecifecation<T> spec){
             return SpecificationEvaluator<T>.Evaluate(_context.Set<T>().AsQueryable(),spec);
         }
 
