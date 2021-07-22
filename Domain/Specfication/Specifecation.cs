@@ -7,14 +7,14 @@ namespace Domain.Specfication
 {
     public class Specification<T> : ISpecifecation<T> where T: BaseEntity
     {
-        public Specification(Func<T,bool> criteria)
+        public Specification(Expression<Func<T,bool>> criteria)
         {
             this.Criteria=criteria;
         }
 
         public List<Expression<Func<T, object>>> Includes {get;private set;}=new List<Expression<Func<T, object>>>();
 
-        public Func<T, bool> Criteria {get;private set;}
+        public Expression<Func<T, bool>> Criteria {get;private set;}
 
         public Expression<Func<T, object>> OrderBy{get;private set;}
 

@@ -1,4 +1,5 @@
 using System;
+using System.Linq.Expressions;
 using Domain.Entities;
 
 namespace Domain.EntitiesSpecification.Statespec
@@ -11,11 +12,11 @@ namespace Domain.EntitiesSpecification.Statespec
             _params = Params;
         }
 
-        public  Func<state,bool> GetCriteria(){
+        public  Expression<Func<state,bool>> GetCriteria(){
             Func<state,bool> criteria = x=>{
                 return (string.IsNullOrEmpty(x.country.name)||x.country.name==_params.Country);
             };
-            return criteria; 
+            return x=> criteria(x); 
 
 
 
