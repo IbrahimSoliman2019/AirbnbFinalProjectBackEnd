@@ -45,5 +45,27 @@ namespace Infrastructure.Repo
             return SpecificationEvaluator<T>.Evaluate(_context.Set<T>().AsQueryable(),spec);
         }
 
+        public async Task<T> AddAsync(T obj)
+        {
+            _context.Set<T>().Add(obj);
+          await  _context.SaveChangesAsync();
+          return obj;
+        }
+
+        public async Task<T> UpdateAsync(T obj)
+        {
+          _context.Set<T>().Attach(obj);
+          _context.Entry(obj).State=EntityState.Modified;
+          await _context.SaveChangesAsync();
+          return obj;
+        }
+
+        public async Task<bool> DeleteAsync(int id)
+        {
+           var obj =await _context.Set<T>().FindAsync(id);
+           _context.Set<T>().Remove(obj);
+          await _context.SaveChangesAsync();
+          return true;
+        }
     }
 }

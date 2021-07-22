@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 
-namespace Domain.Entities
+namespace Api.DTOS
 {
-    public class promo_codes : BaseEntity
+    public class PromoCodesDto
     {
-        public int Id { get; set; }
+         public int Id { get; set; }
 
         public string title { get; set; }
 
@@ -19,6 +19,6 @@ namespace Domain.Entities
 
         public Nullable<System.DateTime> modified { get; set; }
 
-        public virtual ICollection<transaction> transactions { get; set; }
+        public virtual List<TransactionDto> transactions { get; set; }
     }
 }

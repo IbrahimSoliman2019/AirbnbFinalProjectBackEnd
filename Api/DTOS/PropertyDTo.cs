@@ -26,20 +26,20 @@ namespace Api.DTOS
         public byte[] minimum_stay { get; set; }
         public Nullable<byte> minimum_stay_tybe { get; set; }
         public Nullable<byte> refund_tybe { get; set; }
-        public  ICollection<Booking> Bookings { get; set; }
+        public  ICollection<BookingDTO> Bookings { get; set; }
         public  string CityName { get; set; }
         public  string countryName { get; set; }
         public  string currencyName { get; set; }
         public  string propertybeName { get; set; }
         public  string stateName { get; set; }
-        public  string UserEmail { get; set; }
+        public  UserDto User { get; set; }
 
-        public  ICollection<property_amenities> property_amenities { get; set; }
+        public  List<PropertyAmenitiesDto> property_amenities { get; set; }
 
-        public  ICollection<property_images> property_images { get; set; }
+        public  List<PropertyImagesDto> property_images { get; set; }
 
-        public  ICollection<property_reviews> property_reviews { get; set; }
+        public  List<PropertyReviewsDto> property_reviews { get; set; }
 
-        public  ICollection<transaction> transactions { get; set; }
+        public  List<TransactionDto> transactions { get; set; }
     }
 }
