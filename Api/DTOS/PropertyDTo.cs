@@ -14,19 +14,18 @@ namespace Api.DTOS
         public string address { get; set; }
         public string latitude { get; set; }
         public string logitude { get; set; }
-        public string bedroom_count { get; set; }
-        public string bed_count { get; set; }
-        public string bathroom_count { get; set; }
-        public string accomodates_count { get; set; }
+        public int bedroom_count { get; set; }
+        public int bed_count { get; set; }
+        public int bathroom_count { get; set; }
+        public int accomodates_count { get; set; }
         public Nullable<byte> availability_tybe { get; set; }
         public Nullable<System.DateTime> start_date { get; set; }
         public Nullable<System.DateTime> end_date { get; set; }
         public Nullable<decimal> price { get; set; }
         public Nullable<byte> price_tybe { get; set; }
-        public byte[] minimum_stay { get; set; }
+        public int minimum_stay { get; set; }
         public Nullable<byte> minimum_stay_tybe { get; set; }
         public Nullable<byte> refund_tybe { get; set; }
-        public  ICollection<BookingDTO> Bookings { get; set; }
         public  string CityName { get; set; }
         public  string countryName { get; set; }
         public  string currencyName { get; set; }
@@ -40,6 +39,5 @@ namespace Api.DTOS
 
         public  List<PropertyReviewsDto> property_reviews { get; set; }
 
-        public  List<TransactionDto> transactions { get; set; }
     }
 }

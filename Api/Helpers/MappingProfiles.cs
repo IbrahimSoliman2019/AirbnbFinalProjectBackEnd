@@ -1,6 +1,7 @@
 using Api.DTOS;
 using AutoMapper;
 using Domain.Entities;
+using Domain.IdentityEntities;
 
 namespace Api.Helpers
 {
@@ -11,7 +12,13 @@ namespace Api.Helpers
             MapProperty();
 
             // Booking
-            CreateMap<Booking, BookingDTO>();
+            CreateMap<Booking, BookingDTO>()
+            .ForMember(d=>d.transaction,o=>o.MapFrom(s=>s.transaction))
+            .ReverseMap();
+            //User
+            CreateMap<ApplicationUser,UserDto>().ReverseMap();
+            //Transaction
+            CreateMap<transaction,TransactionDto>().ReverseMap();
 
             // state
             CreateMap<state, StateDTO>()
@@ -20,6 +27,7 @@ namespace Api.Helpers
 
         public void MapProperty()
         {
+            CreateMap<PropertyDTo,property>();
             CreateMap<property, PropertyDTo>()
                 .ForMember(d => d.CityName, o => o.MapFrom(s => s.City.name))
                 .ForMember(d => d.countryName,
@@ -32,7 +40,7 @@ namespace Api.Helpers
                 .ForMember(d => d.User,
                 o => o.MapFrom(s => s.User))
                 
-                .ForMember(d=>d.Bookings,o=>o.MapFrom(s=>s.Bookings))
+                
                 .ForMember(d=>d.property_amenities,o=>o.MapFrom(s=>s.property_amenities))
                 ;
         }

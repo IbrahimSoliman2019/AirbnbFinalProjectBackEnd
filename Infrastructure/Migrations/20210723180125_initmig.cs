@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Migrations
 {
-    public partial class initialmigration : Migration
+    public partial class initmig : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -51,6 +51,7 @@ namespace Infrastructure.Migrations
                     date_of_birth = table.Column<DateTime>(type: "datetime2", nullable: true),
                     login_with = table.Column<byte>(type: "tinyint", nullable: true),
                     about = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     recive_coupon = table.Column<byte>(type: "tinyint", nullable: true),
                     created = table.Column<DateTime>(type: "datetime2", nullable: true),
                     moidfied = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -178,6 +179,31 @@ namespace Infrastructure.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Addresses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Street = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    State = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ZipCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Addresses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Addresses_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -353,7 +379,7 @@ namespace Infrastructure.Migrations
                     end_date = table.Column<DateTime>(type: "datetime2", nullable: true),
                     price = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     price_tybe = table.Column<byte>(type: "tinyint", nullable: true),
-                    minimum_stay = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    minimum_stay = table.Column<int>(type: "int", nullable: false),
                     minimum_stay_tybe = table.Column<byte>(type: "tinyint", nullable: true),
                     refund_tybe = table.Column<byte>(type: "tinyint", nullable: true),
                     created = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -417,7 +443,7 @@ namespace Infrastructure.Migrations
                     tax_paid = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     site_fees = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     amount_paid = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    is_refund = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    is_refund = table.Column<bool>(type: "bit", nullable: false),
                     cancel_date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     refund_paid = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     effective_amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
@@ -608,6 +634,13 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Addresses_ApplicationUserId",
+                table: "Addresses",
+                column: "ApplicationUserId",
+                unique: true,
+                filter: "[ApplicationUserId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
@@ -781,6 +814,9 @@ namespace Infrastructure.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Addresses");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 

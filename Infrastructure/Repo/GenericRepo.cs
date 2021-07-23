@@ -47,7 +47,7 @@ namespace Infrastructure.Repo
 
         public async Task<T> AddAsync(T obj)
         {
-            _context.Set<T>().Add(obj);
+          _context.Set<T>().Add(obj);
           await  _context.SaveChangesAsync();
           return obj;
         }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20210722173746_updateUser")]
-    partial class updateUser
+    [Migration("20210723180125_initmig")]
+    partial class initmig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -52,8 +52,8 @@ namespace Infrastructure.Migrations
                     b.Property<decimal>("effective_amount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("is_refund")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("is_refund")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime?>("modified")
                         .HasColumnType("datetime2");
@@ -294,8 +294,8 @@ namespace Infrastructure.Migrations
                     b.Property<string>("logitude")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("minimum_stay")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<int>("minimum_stay")
+                        .HasColumnType("int");
 
                     b.Property<byte?>("minimum_stay_tybe")
                         .HasColumnType("tinyint");

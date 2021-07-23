@@ -19,6 +19,7 @@ namespace Api.DTOS
         public Nullable<decimal> discount_amt { get; set; }
 
 
+        
 
 
         public PromoCodesDto promo_codes { get; set; }
@@ -26,5 +27,6 @@ namespace Api.DTOS
 
 
         public UserDto Recevier { get; set; }
+        public UserDto payee { get; set; }
     }
 }

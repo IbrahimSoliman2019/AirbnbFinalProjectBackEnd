@@ -45,7 +45,7 @@ namespace Api.Controllers
                 data));
         }
 
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         [ProducesResponseType(typeof(ApiErrorResponse),StatusCodes.Status404NotFound)]
 
         public async Task<ActionResult<PropertyDTo>> GetProperty(int id)
@@ -56,5 +56,15 @@ namespace Api.Controllers
             var data = _mapper.Map<property, PropertyDTo>(property);
             return Ok(data);
         }
+        [HttpPost]
+        public async Task<ActionResult<PropertyDTo>> PostProperty(PropertyDTo prop){
+           var property = _mapper.Map<PropertyDTo,property>(prop);
+        var obj =   await _genericRepo.AddAsync(property);
+           return Ok(_mapper.Map<property,PropertyDTo>(obj));
+
+
+        }
+        
+
     }
 }

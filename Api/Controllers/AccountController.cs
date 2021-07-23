@@ -22,7 +22,7 @@ namespace Api.Controllers
             _signInManager = signInManager;
             _userManager = userManager;
         }
-    [Authorize]
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
