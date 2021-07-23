@@ -67,7 +67,7 @@ namespace Api.Controllers
         {
             var user = new ApplicationUser
             {
-                DisplayName = registerDto.DisplayName,
+                DisplayName = registerDto.FullName,
                 Email = registerDto.Email,
                 UserName = registerDto.Email
             };
@@ -76,7 +76,7 @@ namespace Api.Controllers
             if (!result.Succeeded) return BadRequest(new ApiErrorResponse(400));
             return new UserDto
             {
-                DisplayName = registerDto.DisplayName,
+                DisplayName = registerDto.FullName,
                 Email = registerDto.Email,
                 Token = _tokenService.CreateToken(user)
             };
