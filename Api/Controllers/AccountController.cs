@@ -1,8 +1,10 @@
 using System.Threading.Tasks;
+using Api.ApplictionExtentions;
 using Api.DTOS;
 using Api.ErrorsHandlers;
 using Domain.IdentityEntities;
 using Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,6 +22,28 @@ namespace Api.Controllers
             _signInManager = signInManager;
             _userManager = userManager;
         }
+    [Authorize]
+        [HttpGet]
+        public async Task<ActionResult<UserDto>> GetCurrentUser()
+        {
+
+            var user = await _userManager.FindByEmailFromClaimsPrinciples(HttpContext.User);
+            return new UserDto
+            {
+                DisplayName = user.DisplayName,
+                Email = user.Email,
+                Token = _tokenService.CreateToken(user)
+            };
+
+        }
+
+        [HttpGet("emailexists")]
+        public async Task<ActionResult<bool>> CheckEmailExists([FromQuery] string email)
+        {
+            return await _userManager.FindByEmailAsync(email) != null;
+        }
+
+
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> login(LoginDto loginDto)
         {
