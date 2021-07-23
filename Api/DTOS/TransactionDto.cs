@@ -18,15 +18,12 @@ namespace Api.DTOS
 
         public Nullable<decimal> discount_amt { get; set; }
 
-        public BookingDTO Booking { get; set; }
 
-        public CurrencyDto currency { get; set; }
+
 
         public PromoCodesDto promo_codes { get; set; }
 
-        public PropertyDTo property { get; set; }
 
-        public UserDto payee { get; set; }
 
         public UserDto Recevier { get; set; }
     }

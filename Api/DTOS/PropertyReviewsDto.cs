@@ -7,8 +7,5 @@ namespace Api.DTOS
         public string rating { get; set; }
         public string image { get; set; }
     
-        public virtual BookingDTO Booking { get; set; }
-        public virtual PropertyDTo property { get; set; }
-        public virtual UserDto User { get; set; }
     }
 }

@@ -9,7 +9,5 @@ namespace Api.DTOS
   
         public int property_id { get; set; }
      
-        public virtual PropertyDTo property { get; set; }
-        public virtual UserDto User { get; set; }
     }
 }

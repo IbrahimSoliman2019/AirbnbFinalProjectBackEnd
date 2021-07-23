@@ -12,6 +12,5 @@ namespace Api.DTOS
 
         public virtual List<PropertyDTo> properties { get; set; }
 
-        public virtual List<TransactionDto> transactions { get; set; }
     }
 }

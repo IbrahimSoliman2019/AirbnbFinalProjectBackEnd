@@ -19,6 +19,5 @@ namespace Api.DTOS
 
         public Nullable<System.DateTime> modified { get; set; }
 
-        public virtual List<TransactionDto> transactions { get; set; }
     }
 }

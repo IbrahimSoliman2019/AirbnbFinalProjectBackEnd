@@ -8,7 +8,6 @@ namespace Api.DTOS
         public string icon_image { get; set; }
         
     
-        public virtual AmenityDto amenity { get; set; }
-        public virtual PropertyDTo property { get; set; }
+        
     }
 }
