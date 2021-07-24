@@ -20,10 +20,10 @@ namespace Api.Controllers
             _repo = repo;
         }
         [HttpGet]
-        public async Task<ActionResult<List<StateDTO>>> GetStates(StateSpecParams specParams)
+        public async Task<ActionResult<List<StateDTO>>> GetStates([FromQuery]StateSpecParams specParams)
         {
             var spec = new StateSpecWithIncludesAndFilters(specParams);
-            var states = await _repo.GetAllBySpecAsync(spec);
+            var states = await _repo.ListAllBySpec(spec);
             var data = _mapper.Map<IReadOnlyList<state>, List<StateDTO>>(states);
             return Ok(data);
 

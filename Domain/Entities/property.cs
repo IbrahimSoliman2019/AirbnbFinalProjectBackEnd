@@ -39,7 +39,7 @@ namespace Domain.Entities
         public Nullable<System.DateTime> end_date { get; set; }
         public Nullable<decimal> price { get; set; }
         public Nullable<byte> price_tybe { get; set; }
-        public int minimum_stay { get; set; }
+        public Nullable<int> minimum_stay { get; set; }
         public Nullable<byte> minimum_stay_tybe { get; set; }
         public Nullable<byte> refund_tybe { get; set; }
         public Nullable<System.DateTime> created { get; set; }

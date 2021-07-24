@@ -7,41 +7,46 @@ namespace Domain.Specfication
 {
     public class Specification<T> : ISpecifecation<T> where T: BaseEntity
     {
-        public Specification(Expression<Func<T,bool>> criteria)
+        public Specification()
         {
-            this.Criteria=criteria;
         }
 
-        public List<Expression<Func<T, object>>> Includes {get;private set;}=new List<Expression<Func<T, object>>>();
+        public Specification(Expression<Func<T, bool>> criteria)
+        {
+            Criteria = criteria;
+        }
 
-        public Expression<Func<T, bool>> Criteria {get;private set;}
+        public Expression<Func<T, bool>> Criteria { get; }
 
-        public Expression<Func<T, object>> OrderBy{get;private set;}
+        public List<Expression<Func<T, Object>>> Includes { get; } = new List<Expression<Func<T, Object>>>();
+        public Expression<Func<T, object>> OrderBy { get; private set; }
+        public Expression<Func<T, object>> OrderByDescending { get; private set; }
 
-        public bool PaginationEnabled {get;private set;}=false;
+        public int Take { get; private set; }
 
-        public int Take {get;private set;}
+        public int Skip { get; private set; }
 
-        public int Skip {get;private set;}
+        public bool isPagingEnabled { get; private set; }
 
-        public Expression<Func<T, object>> OrderByDescending{get;private set;}
-
-        public void AddInclude(Expression<Func<T, object>> include){
+        protected void AddInclude(Expression<Func<T, Object>> include)
+        {
             Includes.Add(include);
-         }
-        public void AddOrderBy(Expression<Func<T, object>> orderBy){
-           this.OrderBy=orderBy;
-        } 
-        
-        public void AddOrderByDescending(Expression<Func<T, object>> orderBy){
-           this.OrderByDescending=orderBy;
         }
 
-        public void AddPagination(int skip,int take){
-            Skip=skip;
-            Take=take;
-            PaginationEnabled=true;
+
+        protected void AddOrderBy(Expression<Func<T, Object>> orderBy)
+        {
+            OrderBy = orderBy;
         }
-         
+        protected void AddOrderByDescinding(Expression<Func<T, Object>> orderBy)
+        {
+            OrderByDescending = orderBy;
+        }
+        protected void ApplyPaging( int skip,int take)
+        {
+            Take = take;
+            Skip = skip;
+            isPagingEnabled = true;
+        }
     }
 }

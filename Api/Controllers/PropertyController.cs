@@ -33,15 +33,15 @@ namespace Api.Controllers
         {
             var spec = new PropertySpecwithFiltersAndIncludes(specParams);
             var specCount = new PropertySpecWithFilters(specParams);
-            var totalCount = await _genericRepo.CountAsync(specCount);
-            var properties = await _genericRepo.GetAllBySpecAsync(spec);
+          //  var totalCount = await _genericRepo.CountAsync(specCount);
+            var properties = await _genericRepo.ListAllBySpec(spec);
             var data =
                 _mapper
                     .Map
                     <IReadOnlyList<property>, List<PropertyDTo>>(properties);
             return Ok(new Pagination<PropertyDTo>(specParams.PageIndex,
                 specParams.PageSize,
-                totalCount,
+                0,
                 data));
         }
 
@@ -51,7 +51,7 @@ namespace Api.Controllers
         public async Task<ActionResult<PropertyDTo>> GetProperty(int id)
         {
             var spec = new PropertySpecwithFiltersAndIncludes(id);
-            var property = await _genericRepo.GetBySpecAsync(spec);
+            var property = await _genericRepo.GetBySpec(spec);
             if(property==null) return NotFound(new ApiErrorResponse(404));
             var data = _mapper.Map<property, PropertyDTo>(property);
             return Ok(data);

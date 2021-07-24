@@ -8,6 +8,7 @@ using Infrastructure.Data;
 using Infrastructure.SpecificationEvaluators;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace Infrastructure.Repo
 {
     public class GenericRepo<T> : IGenericRepo<T> where T : BaseEntity
@@ -18,54 +19,63 @@ namespace Infrastructure.Repo
             _context = context;
         }
 
-        public async Task<IReadOnlyList<T>> GetAllAsync()
+        public GenericRepo()
+        {
+        }
+
+        public async Task<T> GetByIdAsync(int id)
+        {
+            return await _context.Set<T>().FindAsync(id);
+        }
+
+
+
+        public async Task<IReadOnlyList<T>> ListAllAsync()
         {
             return await _context.Set<T>().ToListAsync();
+
+        }
+        public async Task<T> GetBySpec(ISpecifecation<T> spec)
+        {
+          return   await ApplySpecification(spec).FirstOrDefaultAsync();
         }
 
-        public async Task<T> GetByIDAsync(int id)
+        public async Task<IReadOnlyList<T>> ListAllBySpec(ISpecifecation<T> spec)
         {
-           return await  _context.Set<T>().FindAsync(id);
+            return await ApplySpecification(spec).ToListAsync();
         }
-        public async Task<IReadOnlyList<T>> GetAllBySpecAsync(ISpecifecation<T> spec)
-        {
-            return await ApplyingSpec(spec).ToListAsync();
-        }
-
-        public async Task<T> GetBySpecAsync(ISpecifecation<T> spec)
-        {
-            return await ApplyingSpec(spec).FirstOrDefaultAsync();
-        }
-
+        
         public async Task<int> CountAsync(ISpecifecation<T> spec)
         {
-            return await ApplyingSpec(spec).CountAsync();
+           return await ApplySpecification(spec).CountAsync();
         }
-        private IQueryable<T> ApplyingSpec(ISpecifecation<T> spec){
-            return SpecificationEvaluator<T>.Evaluate(_context.Set<T>().AsQueryable(),spec);
+        private IQueryable<T> ApplySpecification(ISpecifecation<T> spec)
+        {
+            return SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(), spec);
         }
+
 
         public async Task<T> AddAsync(T obj)
         {
-          _context.Set<T>().Add(obj);
-          await  _context.SaveChangesAsync();
-          return obj;
+            _context.Set<T>().Add(obj);
+            await _context.SaveChangesAsync();
+            return obj;
         }
 
         public async Task<T> UpdateAsync(T obj)
         {
-          _context.Set<T>().Attach(obj);
-          _context.Entry(obj).State=EntityState.Modified;
-          await _context.SaveChangesAsync();
-          return obj;
+            _context.Set<T>().Attach(obj);
+            _context.Entry(obj).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return obj;
         }
 
         public async Task<bool> DeleteAsync(int id)
         {
-           var obj =await _context.Set<T>().FindAsync(id);
-           _context.Set<T>().Remove(obj);
-          await _context.SaveChangesAsync();
-          return true;
+            var obj = await _context.Set<T>().FindAsync(id);
+            _context.Set<T>().Remove(obj);
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }

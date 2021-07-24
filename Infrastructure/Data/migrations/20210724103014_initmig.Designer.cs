@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Infrastructure.Migrations
+namespace Infrastructure.data.migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20210723180125_initmig")]
+    [Migration("20210724103014_initmig")]
     partial class initmig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -294,7 +294,7 @@ namespace Infrastructure.Migrations
                     b.Property<string>("logitude")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("minimum_stay")
+                    b.Property<int?>("minimum_stay")
                         .HasColumnType("int");
 
                     b.Property<byte?>("minimum_stay_tybe")
@@ -889,12 +889,13 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Domain.IdentityEntities.ApplicationUser", "User")
                         .WithMany("Bookings")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Domain.Entities.property", "property")
                         .WithMany("Bookings")
                         .HasForeignKey("properity_id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("property");
@@ -906,11 +907,13 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Domain.Entities.country", "Country")
                         .WithMany()
-                        .HasForeignKey("CountryId");
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Domain.Entities.state", "state")
                         .WithMany("Cities")
-                        .HasForeignKey("state_id_fk");
+                        .HasForeignKey("state_id_fk")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Country");
 
@@ -921,27 +924,33 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Domain.IdentityEntities.ApplicationUser", "User")
                         .WithMany("properties")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Domain.Entities.City", "City")
                         .WithMany("properties")
-                        .HasForeignKey("city_id");
+                        .HasForeignKey("city_id")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Domain.Entities.country", "country")
                         .WithMany("properties")
-                        .HasForeignKey("country_id");
+                        .HasForeignKey("country_id")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Domain.Entities.currency", "currency")
                         .WithMany("properties")
-                        .HasForeignKey("currency_id");
+                        .HasForeignKey("currency_id")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Domain.Entities.property_tybe", "property_tybe")
                         .WithMany("properties")
-                        .HasForeignKey("property_type_id");
+                        .HasForeignKey("property_type_id")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Domain.Entities.state", "state")
                         .WithMany("properties")
-                        .HasForeignKey("state_id");
+                        .HasForeignKey("state_id")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("City");
 
@@ -961,13 +970,13 @@ namespace Infrastructure.Migrations
                     b.HasOne("Domain.Entities.amenity", "amenity")
                         .WithMany("property_amenities")
                         .HasForeignKey("amenity_id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Domain.Entities.property", "property")
                         .WithMany("property_amenities")
                         .HasForeignKey("property_id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("amenity");
@@ -979,11 +988,13 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Domain.IdentityEntities.ApplicationUser", "User")
                         .WithMany("property_images")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Domain.Entities.property", "property")
                         .WithMany("property_images")
-                        .HasForeignKey("property_id");
+                        .HasForeignKey("property_id")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("property");
 
@@ -994,17 +1005,19 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Domain.IdentityEntities.ApplicationUser", "User")
                         .WithMany("property_reviews")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Domain.Entities.Booking", "Booking")
                         .WithMany("property_reviews")
                         .HasForeignKey("booking_id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Domain.Entities.property", "property")
                         .WithMany("property_reviews")
-                        .HasForeignKey("propertyid");
+                        .HasForeignKey("propertyid")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Booking");
 
@@ -1017,7 +1030,8 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Domain.Entities.country", "country")
                         .WithMany("states")
-                        .HasForeignKey("country_id");
+                        .HasForeignKey("country_id")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("country");
                 });
@@ -1034,11 +1048,13 @@ namespace Infrastructure.Migrations
 
                     b.HasOne("Domain.Entities.Booking", "Booking")
                         .WithOne("transaction")
-                        .HasForeignKey("Domain.Entities.transaction", "booking_id");
+                        .HasForeignKey("Domain.Entities.transaction", "booking_id")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Domain.Entities.currency", "currency")
                         .WithMany("transactions")
-                        .HasForeignKey("currency_id");
+                        .HasForeignKey("currency_id")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Domain.IdentityEntities.ApplicationUser", "payee")
                         .WithMany()
@@ -1046,11 +1062,13 @@ namespace Infrastructure.Migrations
 
                     b.HasOne("Domain.Entities.promo_codes", "promo_codes")
                         .WithMany("transactions")
-                        .HasForeignKey("promo_code_id");
+                        .HasForeignKey("promo_code_id")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Domain.Entities.property", "property")
                         .WithMany("transactions")
-                        .HasForeignKey("property_id");
+                        .HasForeignKey("property_id")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Booking");
 
@@ -1069,7 +1087,8 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Domain.IdentityEntities.ApplicationUser", "AppUser")
                         .WithOne("Address")
-                        .HasForeignKey("Domain.IdentityEntities.Address", "ApplicationUserId");
+                        .HasForeignKey("Domain.IdentityEntities.Address", "ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("AppUser");
                 });
@@ -1079,7 +1098,7 @@ namespace Infrastructure.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -1088,7 +1107,7 @@ namespace Infrastructure.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -1097,7 +1116,7 @@ namespace Infrastructure.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -1106,13 +1125,13 @@ namespace Infrastructure.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -1121,7 +1140,7 @@ namespace Infrastructure.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 
@@ -1129,11 +1148,13 @@ namespace Infrastructure.Migrations
                 {
                     b.HasOne("Domain.IdentityEntities.ApplicationRole", "applicationRole")
                         .WithMany()
-                        .HasForeignKey("applicationRoleId");
+                        .HasForeignKey("applicationRoleId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Domain.IdentityEntities.ApplicationUser", "applicationUser")
                         .WithMany()
-                        .HasForeignKey("applicationUserId");
+                        .HasForeignKey("applicationUserId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("applicationRole");
 

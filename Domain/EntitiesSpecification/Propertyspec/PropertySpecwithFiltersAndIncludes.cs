@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Domain.Entities;
 using Domain.Specfication;
 
@@ -9,7 +10,14 @@ namespace Domain.EntitiesSpecification.Propertyspec
         public PropertySpecwithFiltersAndIncludes(
             PropertySpecParams propertySpecParams
         ) :
-            base(new PropertySpecCriteria(propertySpecParams).CreateCriteria())
+            base(
+                x=> (!propertySpecParams.NumOfBeds.HasValue || x.bed_count == propertySpecParams.NumOfBeds) &&
+                 (!propertySpecParams.NumOfBedrooms.HasValue || x.bedroom_count == propertySpecParams.NumOfBedrooms) &&
+                 (!propertySpecParams.NumOfBedrooms.HasValue || x.bedroom_count == propertySpecParams.NumOfBedrooms) &&
+                 (propertySpecParams.Amenities == null || x.property_amenities.Select(x=>x.amenity).Select(x=>x.name).ToList().All(propertySpecParams.Amenities.Contains) &&  x.property_amenities.Select(x=>x.amenity).Select(x=>x.name).ToList().Count == propertySpecParams.Amenities.Count) &&
+                 (string.IsNullOrEmpty(propertySpecParams.PropertyType) || x.property_tybe.name == propertySpecParams.PropertyType)
+                
+                )
         {
             AddInclude(x => x.Bookings);
             AddInclude(x => x.User);
@@ -18,7 +26,7 @@ namespace Domain.EntitiesSpecification.Propertyspec
             AddInclude(x => x.state);
             AddInclude(x => x.currency);
             AddOrderBy(x => x.name);
-            AddPagination(propertySpecParams.PageSize *
+            ApplyPaging(propertySpecParams.PageSize *
             (propertySpecParams.PageIndex - 1),
             propertySpecParams.PageSize);
             switch (propertySpecParams.sort)
@@ -27,7 +35,7 @@ namespace Domain.EntitiesSpecification.Propertyspec
                     AddOrderBy(x => x.price);
                     break;
                 case "priceDesc":
-                    AddOrderByDescending(x => x.price);
+                    AddOrderByDescinding(x => x.price);
                     break;
                 case "address":
                     AddOrderBy(x => x.address);

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Domain.Entities;
 using Domain.IdentityEntities;
 using System.Reflection;
+using System.Linq;
 
 namespace Infrastructure.Data
 {
@@ -37,6 +38,11 @@ namespace Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            foreach(var foreignkey in builder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                foreignkey.DeleteBehavior = DeleteBehavior.Restrict;
+            }
 
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 

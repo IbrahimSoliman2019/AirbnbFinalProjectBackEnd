@@ -29,7 +29,7 @@ namespace Domain.EntitiesSpecification.Propertyspec
             };
 
 
-            return x=>criteria(x);
+            return x=> criteria(x);
         }
     }
 }

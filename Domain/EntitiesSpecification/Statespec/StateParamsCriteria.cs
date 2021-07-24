@@ -14,7 +14,7 @@ namespace Domain.EntitiesSpecification.Statespec
 
         public  Expression<Func<state,bool>> GetCriteria(){
             Func<state,bool> criteria = x=>{
-                return (string.IsNullOrEmpty(x.country.name)||x.country.name==_params.Country);
+                return (string.IsNullOrEmpty(_params.Country)||x.country.name==_params.Country);
             };
             return x=> criteria(x); 
 

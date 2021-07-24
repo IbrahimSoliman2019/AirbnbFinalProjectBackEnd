@@ -6,7 +6,10 @@ namespace Domain.EntitiesSpecification.Statespec
 {
     public class StateSpecWithIncludesAndFilters : Specification<state>
     {
-        public StateSpecWithIncludesAndFilters(StateSpecParams specParams) : base(new StateParamsCriteria(specParams).GetCriteria())
+        public StateSpecWithIncludesAndFilters(StateSpecParams _params) : 
+        base( x=>
+                (x.country.name=="Egypt")
+            )
         {
             AddInclude(x=>x.Cities);
             AddInclude(x=>x.country);

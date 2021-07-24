@@ -33,7 +33,7 @@ namespace Api.Controllers
         public async Task<ActionResult<List<BookingDTO>>> GetBookings(int id)
         {
             var spec = new BookingSpecification(id);
-            var bookings = await _bookingrepo.GetAllBySpecAsync(spec);
+            var bookings = await _bookingrepo.ListAllBySpec(spec);
             var mapped =
                 _mapper.Map<IReadOnlyList<Booking>, List<BookingDTO>>(bookings);
             return Ok(mapped);
@@ -44,7 +44,7 @@ namespace Api.Controllers
         Gettransactions(int id)
         {
             var spec = new TransactionSpecification(id);
-            var transactions = await _transactionrepo.GetAllBySpecAsync(spec);
+            var transactions = await _transactionrepo.ListAllBySpec(spec);
             var mapped =
                 _mapper
                     .Map
