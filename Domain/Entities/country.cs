@@ -13,6 +13,8 @@ namespace Domain.Entities
         public string name { get; set; }
         public string code { get; set; }
         public Nullable<byte> status { get; set; }
+
+        public string PictureUrl { get; set; }
     
         public virtual ICollection<property> properties { get; set; }
         public virtual ICollection<state> states { get; set; }

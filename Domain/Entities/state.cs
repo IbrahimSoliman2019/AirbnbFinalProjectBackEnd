@@ -17,6 +17,8 @@ namespace Domain.Entities
         public string code { get; set; }
         public Nullable<byte> status { get; set; }
     
+        public string PictureUrl { get; set; }
+
         public virtual ICollection<City> Cities { get; set; }
         public virtual country country { get; set; }
         public virtual ICollection<property> properties { get; set; }

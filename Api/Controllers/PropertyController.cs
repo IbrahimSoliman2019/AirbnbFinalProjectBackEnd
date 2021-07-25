@@ -69,14 +69,17 @@ namespace Api.Controllers
         {
             var spec = new PropertySpecwithFiltersAndIncludes(id);
             var property = await _genericRepo.GetBySpec(spec);
+
             if(property==null) return NotFound(new ApiErrorResponse(404));
             var data = _mapper.Map<property, PropertyDTo>(property);
             return Ok(data);
         }
         [HttpPost]
         public async Task<ActionResult<PropertyDTo>> PostProperty(PropertyDTo prop){
+          
            var property = _mapper.Map<PropertyDTo,property>(prop);
         var obj =   await _genericRepo.AddAsync(property);
+        obj.state.name = "Giza";
            return Ok(_mapper.Map<property,PropertyDTo>(obj));
 
 

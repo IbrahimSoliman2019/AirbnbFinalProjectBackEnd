@@ -10,7 +10,7 @@ namespace Domain.EntitiesSpecification.Propertyspec
         private int _pageSize =6;
         private int _maxPageSize =50;
         
-        public int PageSize { get=>_pageSize; set=>_pageSize=(value>_maxPageSize)?value:_pageSize; }
+        public int PageSize { get=>_pageSize; set=>_pageSize=(value<_maxPageSize)?value:_pageSize; }
 
         public bool? InstantHost { get; set; }
         public bool? CancellationFlexibility { get; set; }
@@ -20,6 +20,7 @@ namespace Domain.EntitiesSpecification.Propertyspec
         public string search { get; set; }
         public int? NumOfBeds { get; set; }
         public int? NumOfBedrooms { get; set; }
+        public int? StateId { get; set; }
         public int? NumofBathrooms { get; set; }
 
         public List<string> Amenities { get; set; }

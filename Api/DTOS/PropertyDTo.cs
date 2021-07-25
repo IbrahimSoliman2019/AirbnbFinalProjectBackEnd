@@ -32,12 +32,15 @@ namespace Api.DTOS
         public  string propertybeName { get; set; }
         public  string stateName { get; set; }
         public  UserDto User { get; set; }
+        
+
+
 
         public  List<PropertyAmenitiesDto> property_amenities { get; set; }
 
-        public  List<PropertyImagesDto> property_images { get; set; }
+        public  List<string> image { get; set; }
 
-        public  List<PropertyReviewsDto> property_reviews { get; set; }
+        
 
     }
 }
