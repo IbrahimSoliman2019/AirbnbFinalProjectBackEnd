@@ -26,7 +26,7 @@ namespace Api
             services.AddAutoMapper(typeof(PropertyDTo));
 
             services.AddDbContext<ApplicationContext>(opt=>{
-                opt.UseSqlServer(Configuration.GetConnectionString("Default"));
+                opt.UseSqlServer(Configuration.GetConnectionString("Default")).EnableSensitiveDataLogging();
             });
             services.AddIdentity<ApplicationUser,ApplicationRole>().AddEntityFrameworkStores<ApplicationContext>();
 

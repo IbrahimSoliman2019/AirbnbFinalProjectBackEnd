@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Api.DTOS;
 using Api.Helpers;
@@ -24,10 +25,18 @@ namespace Api.Controllers
         {
             var spec = new StateSpecWithIncludesAndFilters(specParams);
             var states = await _repo.ListAllBySpec(spec);
-            var data = _mapper.Map<IReadOnlyList<state>, List<StateDTO>>(states);
+            var statefiltered = FileStreamResult(states,specParams);
+            var data = _mapper.Map<List<state>, List<StateDTO>>(statefiltered);
             return Ok(data);
 
 
+        }
+
+        private List<state> FileStreamResult(IReadOnlyList<state> states, StateSpecParams specParams)
+        {
+          var filtered =  states
+          .Where(x=>(string.IsNullOrEmpty(specParams.Country)||x.country.name==specParams.Country)).ToList();
+          return filtered;
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Api.DTOS;
 using Api.ErrorsHandlers;
@@ -9,6 +10,7 @@ using Domain.EntitiesSpecification.Propertyspec;
 using Domain.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace Api.Controllers
 {
@@ -29,20 +31,35 @@ namespace Api.Controllers
 
         [HttpGet]
         public async Task<ActionResult<Pagination<PropertyDTo>>>
-        GetProperties([FromQuery] PropertySpecParams specParams)
+        GetProperties([FromQuery]PropertySpecParams specParams)
         {
             var spec = new PropertySpecwithFiltersAndIncludes(specParams);
             var specCount = new PropertySpecWithFilters(specParams);
-          //  var totalCount = await _genericRepo.CountAsync(specCount);
+            var propertiesWithoutIncludes = await _genericRepo.ListAllBySpec(specCount);
+            var propcounted = FilTer(propertiesWithoutIncludes,specParams);
             var properties = await _genericRepo.ListAllBySpec(spec);
+
+            var propertiesfiltered = FilTer(properties,specParams);
             var data =
                 _mapper
                     .Map
-                    <IReadOnlyList<property>, List<PropertyDTo>>(properties);
+                    <List<property>, List<PropertyDTo>>(propertiesfiltered);
             return Ok(new Pagination<PropertyDTo>(specParams.PageIndex,
                 specParams.PageSize,
-                0,
+                 propcounted.Count(),
                 data));
+        }
+
+        private List<property> FilTer(IReadOnlyList<property> properties, PropertySpecParams specParams)
+        {
+            var filtered = properties.Where(  x=> (!specParams.NumOfBeds.HasValue || x.bed_count == specParams.NumOfBeds) &&
+                 (!specParams.NumOfBedrooms.HasValue || x.bedroom_count == specParams.NumOfBedrooms) &&
+                (!specParams.StateId.HasValue || x.state_id == specParams.StateId) &&
+                 (!specParams.NumOfBedrooms.HasValue || x.bedroom_count == specParams.NumOfBedrooms) &&
+                 (specParams.Amenities == null ||  x.property_amenities.Select(s => s.amenity).Select(s => s.name).ToList().All(specParams.Amenities.Contains) &&  x.property_amenities.Select(s => s.amenity).Select(s => s.name).ToList().Count == specParams.Amenities.Count) &&
+                 (string.IsNullOrEmpty(specParams.PropertyType) || x.property_tybe.name == specParams.PropertyType)).ToList();
+
+                 return filtered;
         }
 
         [HttpGet("{id}")]

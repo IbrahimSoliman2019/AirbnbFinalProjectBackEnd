@@ -3,6 +3,7 @@ using Api.ErrorsHandlers;
 using Domain.Interfaces;
 using Infrastructure.Data;
 using Infrastructure.Repo;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +15,8 @@ namespace Api.ApplictionExtentions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services){
             
             services.AddScoped(typeof(IGenericRepo<>), typeof(GenericRepo<>));
+            services.AddScoped<ITokenService,TokenService>();
+
             services.Configure<ApiBehaviorOptions>(Opt =>
             {
                 Opt.InvalidModelStateResponseFactory=ActionContext=>{
