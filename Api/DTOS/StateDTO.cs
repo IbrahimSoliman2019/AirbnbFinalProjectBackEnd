@@ -13,6 +13,6 @@ namespace Api.DTOS
         public string code { get; set; }
 
 
-        public string country { get; set; }
+        public string countryName { get; set; }
     }
 }

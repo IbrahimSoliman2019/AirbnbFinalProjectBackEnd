@@ -10,6 +10,5 @@ namespace Api.DTOS
         public string icon_image { get; set; }
 
     
-        public virtual List<PropertyAmenitiesDto> property_amenities { get; set; }
     }
 }

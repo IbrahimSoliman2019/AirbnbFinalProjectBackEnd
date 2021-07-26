@@ -4,16 +4,14 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Infrastructure.data.Migrations
+namespace Infrastructure.data.igrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20210725175750_initmig")]
-    partial class initmig
+    partial class ApplicationContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,7 +49,8 @@ namespace Infrastructure.data.Migrations
 
                     b.Property<decimal>("effective_amount")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,2)")
+                        .HasComputedColumnSql("price_per_day*(DATEDIFF(day, check_in_date, check_out_date))*.8");
 
                     b.Property<bool>("is_refund")
                         .HasColumnType("bit");
@@ -64,7 +63,8 @@ namespace Infrastructure.data.Migrations
 
                     b.Property<decimal>("price_per_stay")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,2)")
+                        .HasComputedColumnSql("price_per_day*(DATEDIFF(day, check_in_date, check_out_date))");
 
                     b.Property<int>("properity_id")
                         .HasColumnType("int");
@@ -74,11 +74,13 @@ namespace Infrastructure.data.Migrations
 
                     b.Property<decimal>("site_fees")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,2)")
+                        .HasComputedColumnSql("price_per_day*(DATEDIFF(day, check_in_date, check_out_date))*.15");
 
                     b.Property<decimal>("tax_paid")
                         .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,2)")
+                        .HasComputedColumnSql("price_per_day*(DATEDIFF(day, check_in_date, check_out_date))*.05");
 
                     b.HasKey("Id");
 

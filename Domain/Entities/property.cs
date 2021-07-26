@@ -10,7 +10,22 @@ namespace Domain.Entities
 
     public class property : BaseEntity
     {
+        public property()
+        {
+            property_images = new HashSet<property_images>();
+            property_amenities = new HashSet<property_amenities>();
+            property_reviews = new HashSet<property_reviews>();
+            transactions = new HashSet<transaction>();
+            City = new City();
+            currency = new currency();
+            property_tybe = new property_tybe();
+            country = new country();
+            state = new state();
+            Bookings = new HashSet<Booking>();
+            User = new ApplicationUser();
 
+
+        }
 
         public int id { get; set; }
         public string name { get; set; }

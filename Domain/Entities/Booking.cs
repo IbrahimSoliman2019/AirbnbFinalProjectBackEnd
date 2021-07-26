@@ -20,18 +20,17 @@ namespace Domain.Entities
         public DateTime check_in_date { get; set; }
         public DateTime check_out_date { get; set; }
         public decimal price_per_day { get; set; }
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)] 
-        public decimal price_per_stay { get=>price_per_stay; set=>price_per_stay=price_per_day*(check_out_date-check_out_date).Days; }
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)] 
-        public decimal tax_paid { get=>tax_paid; set=>tax_paid=price_per_day*(check_out_date-check_out_date).Days*.05M; }
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)] 
-        public decimal site_fees { get=>site_fees; set=>site_fees=price_per_day*(check_out_date-check_out_date).Days*.15M; }
+        public decimal price_per_stay { get; set; }
+        
+        public decimal tax_paid { get; set; }
+        
+        public decimal site_fees { get; set; }
         public decimal amount_paid { get; set; }
         public bool is_refund { get; set; }
         public DateTime? cancel_date { get; set; }
         public decimal refund_paid { get; set; }
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)] 
-        public decimal effective_amount { get=>effective_amount; set=>effective_amount=price_per_day*(check_out_date-check_out_date).Days*.2M; }
+        
+        public decimal effective_amount { get; set; }
         public Nullable<System.DateTime> booking_date { get; set; }
         public Nullable<System.DateTime> created { get; set; }
         public Nullable<System.DateTime> modified { get; set; }

@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Infrastructure.data.Migrations
+namespace Infrastructure.data.igrations
 {
     public partial class initmig : Migration
     {
@@ -441,14 +441,14 @@ namespace Infrastructure.data.Migrations
                     check_in_date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     check_out_date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     price_per_day = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    price_per_stay = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    tax_paid = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    site_fees = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    price_per_stay = table.Column<decimal>(type: "decimal(18,2)", nullable: false, computedColumnSql: "price_per_day*(DATEDIFF(day, check_in_date, check_out_date))"),
+                    tax_paid = table.Column<decimal>(type: "decimal(18,2)", nullable: false, computedColumnSql: "price_per_day*(DATEDIFF(day, check_in_date, check_out_date))*.05"),
+                    site_fees = table.Column<decimal>(type: "decimal(18,2)", nullable: false, computedColumnSql: "price_per_day*(DATEDIFF(day, check_in_date, check_out_date))*.15"),
                     amount_paid = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     is_refund = table.Column<bool>(type: "bit", nullable: false),
                     cancel_date = table.Column<DateTime>(type: "datetime2", nullable: true),
                     refund_paid = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    effective_amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    effective_amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false, computedColumnSql: "price_per_day*(DATEDIFF(day, check_in_date, check_out_date))*.8"),
                     booking_date = table.Column<DateTime>(type: "datetime2", nullable: true),
                     created = table.Column<DateTime>(type: "datetime2", nullable: true),
                     modified = table.Column<DateTime>(type: "datetime2", nullable: true),

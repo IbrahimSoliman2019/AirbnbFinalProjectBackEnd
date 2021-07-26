@@ -31,16 +31,7 @@ namespace Api.DTOS
         public  string currencyName { get; set; }
         public  string propertybeName { get; set; }
         public  string stateName { get; set; }
-        public  UserDto User { get; set; }
-        
-
-
-
-        public  List<PropertyAmenitiesDto> property_amenities { get; set; }
-
-        public  List<string> image { get; set; }
-
-        
+              
 
     }
 }
