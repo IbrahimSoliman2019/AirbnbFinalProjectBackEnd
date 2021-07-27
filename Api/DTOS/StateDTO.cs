@@ -14,5 +14,7 @@ namespace Api.DTOS
 
 
         public string countryName { get; set; }
+        public string countryCode { get; set; }
+
     }
 }

@@ -14,7 +14,6 @@ namespace Infrastructure.SpecificationEvaluators
         ISpecifecation<TEntity> spec)
         {
             var query = inputquery;
-            query = spec.Includes.Aggregate(query, (current, include) => current.Include(include));
            
             if (spec.Criteria != null)
             {
@@ -38,8 +37,9 @@ namespace Infrastructure.SpecificationEvaluators
                 query = query.Skip(spec.Skip).Take(spec.Take);
             }
 
-            var sql = query.ToQueryString();
             
+            
+            query = spec.Includes.Aggregate(query, (current, include) => current.Include(include));
 
             return query;
         }

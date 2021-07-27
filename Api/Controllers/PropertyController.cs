@@ -86,39 +86,64 @@ namespace Api.Controllers
         }
         [HttpPost]
         public async Task<ActionResult<PropertyDTo>> PostProperty(PropertyDToPosting prop){
-          
-           var property = _mapper.Map<PropertyDTo,property>(prop.Propertydto);
-            foreach (var item in prop.PropertyImages){
-                var image = _mapper.Map<PropertyImagesDto,property_images>(item);
+
+           
+            var property = _mapper.Map<PropertyDTo, property>(prop.Propertydto);
+            foreach (var item in prop.PropertyImages)
+            {
+                var image = _mapper.Map<PropertyImagesDto, property_images>(item);
                 property.property_images.Add(image);
             }
-            //foreach (var item in prop.Amenities)
-            //{
-            //    var propamenity = _mapper.Map<PropertyAmenitiesDto, property_amenities>(item);
-            //    property.property_amenities.Add();
-            //}
+            foreach (var item in prop.Amenities)
+            {
+                var amenity = _mapper.Map<AmenityDto, amenity>(item);
+                var propamenity = new property_amenities
+                {
+                    amenity_id = amenity.Id,
+
+                };
+                property.property_amenities.Add(propamenity);
+            }
+            var country = context.Countries.Where(x => x.name == prop.state.countryName).FirstOrDefault();
+            if (country == null)
+            {
+                context.Countries.Add(new country { name=prop.state.countryName,code =prop.state.countryName});
+                context.SaveChanges();
+                country = context.Countries.Where(x => x.name == prop.state.countryName).FirstOrDefault();
+                property.country = country;
+            }
+            else
+            {
+                property.country = country;
+            }
             var state = context.States.Where(x => x.name == prop.state.name).FirstOrDefault();
             if (state == null)
             {
-                context.States.Add(_mapper.Map<StateDTO, state>(prop.state));
+                context.States.Add(new state { country=country,name=prop.state.name});
                 context.SaveChanges();
-                property.state = context.States.Where(x => x.name == prop.state.name).FirstOrDefault(); ;
+                state = context.States.Where(x => x.name == prop.state.name).FirstOrDefault();
+                property.state = state;
             }
             else
             {
                 property.state = state;
             }
-           
-            
-            property.User =await userManager.FindByEmailFromClaimsPrinciples(HttpContext.User)??null;
+            if (!country.states.Contains(state))
+            {
+                country.states.Add(state);
+                context.SaveChanges();
+            }
 
-           var obj =   await _genericRepo.AddAsync(property);
+            property.User = await userManager.FindByEmailFromClaimsPrinciples(HttpContext.User) ?? null;
 
-           return Ok(_mapper.Map<property,PropertyDTo>(obj));
+            var obj = await _genericRepo.AddAsync(property);
+
+            return Ok(_mapper.Map<property, PropertyDTo>(obj));
+
 
 
         }
-        
+
 
     }
 }

@@ -10,8 +10,15 @@ namespace Domain.Entities
     
     public  class Booking : BaseEntity
     {
-        
-    public int Id { get; set; }
+        public Booking()
+        {
+            property = new property();
+            User = new ApplicationUser();
+            transaction = new transaction();
+            property_reviews = new HashSet<property_reviews>();
+        }
+
+        public int Id { get; set; }
 
         [ForeignKey("property")]
         public int properity_id { get; set; }

@@ -22,7 +22,17 @@ namespace Infrastructure.Data
                 }
                await context.SaveChangesAsync();
             }
-          }
+                if (!context.Amenities.Any())
+                {
+                    var amenitiesdata = File.ReadAllText("../Infrastructure/Data/SeedData/Amenities.json");
+                    var amenities = JsonSerializer.Deserialize<List<amenity>>(amenitiesdata);
+                    foreach (var item in amenities)
+                    {
+                        context.Amenities.Add(item);
+                    }
+                    await context.SaveChangesAsync();
+                }
+            }
           catch(Exception ex){
               var logger = loggerFactory.CreateLogger<SeedDataDbContext>();
               logger.LogError(ex.Message);

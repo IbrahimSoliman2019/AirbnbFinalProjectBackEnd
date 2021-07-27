@@ -8,8 +8,13 @@ namespace Domain.Entities
     
     public  class state : BaseEntity
     {
-       
-    
+        public state()
+        {
+            properties = new HashSet<property>();
+            country = new country();
+            Cities = new HashSet<City>();
+        }
+
         public int id { get; set; }
         [ForeignKey("country")]
         public Nullable<int> country_id { get; set; }
