@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "F:\\airbnb project\\Backend\\Domain\\Domain.csproj": {}
+    "E:\\Private\\Study\\ITI\\Final Project\\Api\\AirbnbFinalProjectBackEnd\\Domain\\Domain.csproj": {}
   },
   "projects": {
-    "F:\\airbnb project\\Backend\\Domain\\Domain.csproj": {
+    "E:\\Private\\Study\\ITI\\Final Project\\Api\\AirbnbFinalProjectBackEnd\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\airbnb project\\Backend\\Domain\\Domain.csproj",
+        "projectUniqueName": "E:\\Private\\Study\\ITI\\Final Project\\Api\\AirbnbFinalProjectBackEnd\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "F:\\airbnb project\\Backend\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\eng ebraheem\\.nuget\\packages\\",
-        "outputPath": "F:\\airbnb project\\Backend\\Domain\\obj\\",
+        "projectPath": "E:\\Private\\Study\\ITI\\Final Project\\Api\\AirbnbFinalProjectBackEnd\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
+        "outputPath": "E:\\Private\\Study\\ITI\\Final Project\\Api\\AirbnbFinalProjectBackEnd\\Domain\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\eng ebraheem\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -60,7 +64,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }
