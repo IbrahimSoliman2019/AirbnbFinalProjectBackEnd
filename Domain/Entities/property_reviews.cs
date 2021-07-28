@@ -1,5 +1,6 @@
 
     using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Domain.IdentityEntities;
 
@@ -11,7 +12,8 @@ namespace Domain.Entities
     {
         public int id { get; set; }
         public string comment { get; set; }
-        public string rating { get; set; }
+        [Range(1,5)]
+        public int? rating { get; set; }
         public Nullable<System.DateTime> created { get; set; }
         public Nullable<System.DateTime> moidfied { get; set; }
         public Nullable<byte> status { get; set; }

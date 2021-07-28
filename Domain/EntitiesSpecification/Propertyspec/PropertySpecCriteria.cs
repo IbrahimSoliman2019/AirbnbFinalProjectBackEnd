@@ -13,7 +13,7 @@ namespace Domain.EntitiesSpecification.Propertyspec
             _propertySpecParams = propertySpecParams;
         }
 
-        public Expression<Func<property, bool>> CreateCriteria()
+        public static Func<property, bool> CreateCriteria(PropertySpecParams _propertySpecParams)
         {
 
             Func<property, bool> criteria = (x) =>
@@ -29,7 +29,9 @@ namespace Domain.EntitiesSpecification.Propertyspec
             };
 
 
-            return x=> criteria(x);
+            return  criteria;
         }
+       
+            
     }
 }

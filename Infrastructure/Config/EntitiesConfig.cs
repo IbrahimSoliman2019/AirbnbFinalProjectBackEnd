@@ -60,21 +60,23 @@ namespace Infrastructure.EntitiesConfig
              builder.Property(x=>x.price_per_day)
             .HasColumnType("decimal(18,2)");
              builder.Property(x=>x.price_per_stay)
-            .HasColumnType("decimal(18,2)");
+            .HasColumnType("decimal(18,2)")
+            .HasComputedColumnSql("price_per_day*(DATEDIFF(day, check_in_date, check_out_date))");
              builder.Property(x=>x.tax_paid)
-            .HasColumnType("decimal(18,2)");
+            .HasColumnType("decimal(18,2)")
+            .HasComputedColumnSql("price_per_day*(DATEDIFF(day, check_in_date, check_out_date))*.05");
              builder.Property(x=>x.amount_paid)
             .HasColumnType("decimal(18,2)");
              builder.Property(x=>x.refund_paid)
             .HasColumnType("decimal(18,2)");
-             builder.Property(x=>x.amount_paid)
-            .HasColumnType("decimal(18,2)");
-             builder.Property(x=>x.amount_paid)
-            .HasColumnType("decimal(18,2)");
+            
+            
              builder.Property(x=>x.site_fees)
-            .HasColumnType("decimal(18,2)");
+            .HasColumnType("decimal(18,2)")
+            .HasComputedColumnSql("price_per_day*(DATEDIFF(day, check_in_date, check_out_date))*.15");
              builder.Property(x=>x.effective_amount)
-            .HasColumnType("decimal(18,2)");
+            .HasColumnType("decimal(18,2)")
+            .HasComputedColumnSql("price_per_day*(DATEDIFF(day, check_in_date, check_out_date))*.8");
         }
     }
     public class PropertyConfig : IEntityTypeConfiguration<property>

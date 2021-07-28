@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Infrastructure.data.migrations
+namespace Infrastructure.data.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20210724103014_initmig")]
+    [Migration("20210726173056_initmig")]
     partial class initmig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,7 +18,7 @@ namespace Infrastructure.data.migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.7")
+                .HasAnnotation("ProductVersion", "5.0.8")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Domain.Entities.Booking", b =>
@@ -37,7 +37,7 @@ namespace Infrastructure.data.migrations
                     b.Property<DateTime?>("booking_date")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("cancel_date")
+                    b.Property<DateTime?>("cancel_date")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("check_in_date")
@@ -50,7 +50,9 @@ namespace Infrastructure.data.migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("effective_amount")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("decimal(18,2)")
+                        .HasComputedColumnSql("price_per_day*(DATEDIFF(day, check_in_date, check_out_date))*.8");
 
                     b.Property<bool>("is_refund")
                         .HasColumnType("bit");
@@ -62,7 +64,9 @@ namespace Infrastructure.data.migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("price_per_stay")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("decimal(18,2)")
+                        .HasComputedColumnSql("price_per_day*(DATEDIFF(day, check_in_date, check_out_date))");
 
                     b.Property<int>("properity_id")
                         .HasColumnType("int");
@@ -71,10 +75,14 @@ namespace Infrastructure.data.migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("site_fees")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("decimal(18,2)")
+                        .HasComputedColumnSql("price_per_day*(DATEDIFF(day, check_in_date, check_out_date))*.15");
 
                     b.Property<decimal>("tax_paid")
-                        .HasColumnType("decimal(18,2)");
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("decimal(18,2)")
+                        .HasComputedColumnSql("price_per_day*(DATEDIFF(day, check_in_date, check_out_date))*.05");
 
                     b.HasKey("Id");
 
@@ -143,6 +151,9 @@ namespace Infrastructure.data.migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("PictureUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("code")
                         .HasColumnType("nvarchar(max)");
@@ -430,8 +441,8 @@ namespace Infrastructure.data.migrations
                     b.Property<int?>("propertyid")
                         .HasColumnType("int");
 
-                    b.Property<string>("rating")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("rating")
+                        .HasColumnType("int");
 
                     b.Property<byte?>("status")
                         .HasColumnType("tinyint");
@@ -480,6 +491,9 @@ namespace Infrastructure.data.migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("PictureUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("code")
                         .HasColumnType("nvarchar(max)");

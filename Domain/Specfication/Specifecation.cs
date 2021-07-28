@@ -16,9 +16,9 @@ namespace Domain.Specfication
             Criteria = criteria;
         }
 
-        public Expression<Func<T, bool>> Criteria { get; }
+        public Expression<Func<T, bool>> Criteria { get;  set; }
 
-        public List<Expression<Func<T, Object>>> Includes { get; } = new List<Expression<Func<T, Object>>>();
+        public List<Expression<Func<T, Object>>> Includes { get; private set; } = new List<Expression<Func<T, Object>>>();
         public Expression<Func<T, object>> OrderBy { get; private set; }
         public Expression<Func<T, object>> OrderByDescending { get; private set; }
 
@@ -31,6 +31,10 @@ namespace Domain.Specfication
         protected void AddInclude(Expression<Func<T, Object>> include)
         {
             Includes.Add(include);
+        }
+
+        protected void AddCriteria(Expression<Func<T,bool>> criteria){
+            Criteria = criteria;
         }
 
 
