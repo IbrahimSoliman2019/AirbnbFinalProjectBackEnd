@@ -77,13 +77,29 @@ namespace Api.Controllers
 
         public async Task<ActionResult<PropertyDTo>> GetProperty(int id)
         {
-            var spec = new PropertySpecwithFiltersAndIncludes(id);
-            var property = await _genericRepo.GetBySpec(spec);
+            //var spec = new PropertySpecwithFiltersAndIncludes(id);
+            //var property = await _genericRepo.GetBySpec(spec);
+            var property = context.Properties.Find(id);
 
-            if(property==null) return NotFound(new ApiErrorResponse(404));
+            if (property==null) return NotFound(new ApiErrorResponse(404));
             var data = _mapper.Map<property, PropertyDTo>(property);
             return Ok(data);
         }
+
+        //[HttpGet("{id}")]
+        ////[ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status404NotFound)]
+
+        //public async Task<ActionResult<PropertyDTo>> GetPropertyByState(int id)
+        //{
+        //    //var spec = new PropertySpecwithFiltersAndIncludes(id);
+        //    //var property = await _genericRepo.GetBySpec(spec);
+        //    var property = context.States.Find(id).properties.ToList();
+
+        //    if (property == null) return NotFound(new ApiErrorResponse(404));
+        //    var data = _mapper.Map<List<property>,List<PropertyDTo>>(property);
+        //    return Ok(data);
+        //}
+
         [HttpPost]
         public async Task<ActionResult<PropertyDTo>> PostProperty(PropertyDToPosting prop){
 

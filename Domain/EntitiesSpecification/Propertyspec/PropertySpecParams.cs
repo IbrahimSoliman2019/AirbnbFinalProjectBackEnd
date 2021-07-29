@@ -31,7 +31,7 @@ namespace Domain.EntitiesSpecification.Propertyspec
         public List<string> HouseRules { get; set; }
         public List<string> HostLanguage { get; set; }
 
-        public int? StateId { get; set; }
+
 
     }
 

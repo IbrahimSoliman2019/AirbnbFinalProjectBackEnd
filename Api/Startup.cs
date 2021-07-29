@@ -19,7 +19,7 @@ namespace Api
         }
 
         public IConfiguration Configuration { get; }
-        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        readonly string MyAllowSpecificOrigins = "CorsPolicy";
 
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -28,7 +28,6 @@ namespace Api
             services.AddAutoMapper(typeof(Startup));
             
 
-<<<<<<< HEAD
             services.AddCors(options =>
             {
                 options.AddPolicy(name: MyAllowSpecificOrigins,
@@ -40,11 +39,6 @@ namespace Api
             });
 
             services.AddDbContext<ApplicationContext>(opt=>{
-=======
-
-            services.AddDbContext<ApplicationContext>(opt =>
-            {
->>>>>>> 487988618a9ffbbab3f6f0f0c31468901b88af76
                 opt.UseSqlServer(Configuration.GetConnectionString("Default")).EnableSensitiveDataLogging();
             });
             services.AddIdentity<ApplicationUser, ApplicationRole>().AddEntityFrameworkStores<ApplicationContext>();
