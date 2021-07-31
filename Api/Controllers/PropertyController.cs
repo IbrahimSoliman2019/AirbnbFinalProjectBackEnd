@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ using Infrastructure.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace Api.Controllers
 {
@@ -60,6 +61,8 @@ namespace Api.Controllers
                 data));
         }
 
+
+
         private List<property> FilTer(IReadOnlyList<property> properties, PropertySpecParams specParams)
         {
             var filtered = properties.Where(  x=> (!specParams.NumOfBeds.HasValue || x.bed_count == specParams.NumOfBeds) &&
@@ -71,19 +74,46 @@ namespace Api.Controllers
 
                  return filtered;
         }
-
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(ApiErrorResponse),StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status404NotFound)]
 
-        public async Task<ActionResult<PropertyDTo>> GetProperty(int id)
+        public async Task<ActionResult<PropertyDetailsDto>> GetProperty(int id)
         {
-            var spec = new PropertySpecwithFiltersAndIncludes(id);
-            var property = await _genericRepo.GetBySpec(spec);
+            var property = context.Properties.Include(x => x.property_reviews).Include(x => x.property_images)
+            .Include(x => x.property_amenities).FirstOrDefault(x => x.id == id);
+            var proptyreviews = property.property_reviews.ToList();
+            var propertyimages = property.property_images.ToList();
 
-            if(property==null) return NotFound(new ApiErrorResponse(404));
-            var data = _mapper.Map<property, PropertyDTo>(property);
-            return Ok(data);
+            var propertyAmenit = property.property_amenities.ToList().Select(x => x.amenity).ToList();
+            if (property == null) return NotFound(new ApiErrorResponse(404));
+            var propertymapped = _mapper.Map<property, PropertyDTo>(property);
+            var propertyreviewsmapped = _mapper.Map<List<property_reviews>, List<PropertyReviewsDto>>(proptyreviews);
+            var propertyimagesmapped = _mapper.Map<List<property_images>, List<PropertyImagesDto>>(propertyimages);
+            var AmenitesMap = _mapper.Map<List<amenity>, List<AmenityDto>>(propertyAmenit);
+            var propdetails = new PropertyDetailsDto
+            {
+                propertyDTo = propertymapped,
+                propertyReviewsDtos = propertyreviewsmapped,
+                propertyImagesDtos = propertyimagesmapped,
+                AmenitiesDtos = AmenitesMap,
+
+            };
+            return Ok(propdetails);
         }
+
+
+        //[HttpGet("{id}")]
+        //[ProducesResponseType(typeof(ApiErrorResponse),StatusCodes.Status404NotFound)]
+
+        //public async Task<ActionResult<PropertyDTo>> GetProperty(int id)
+        //{
+        //    // var spec = new PropertySpecwithFiltersAndIncludes(id);
+        //    // var property = await _genericRepo.GetBySpec(spec);
+        //        var property = context.Properties.Find(id);
+        //    if(property==null) return NotFound(new ApiErrorResponse(404));
+        //    var data = _mapper.Map<property, PropertyDTo>(property);
+        //    return Ok(data);
+        //}
         [HttpPost]
         public async Task<ActionResult<PropertyDTo>> PostProperty(PropertyDToPosting prop){
 
@@ -143,6 +173,21 @@ namespace Api.Controllers
 
 
         }
+        [HttpGet("Random")]
+        public async Task <ActionResult<List<PropertyWithImageDto>>>GetRandomPropety()
+        {
+            var properties = await context.Properties.Include(x=>x.property_images).OrderBy(x => Guid.NewGuid()).Take(4).ToListAsync();
+            var PropertMap = _mapper.Map<List<property>, List<PropertyDTo>>(properties);
+            List<PropertyWithImageDto> propertyWithImageDtos = new List<PropertyWithImageDto>();
+            foreach(var prop in properties) {
+                var propimages = prop.property_images.ToList();
+                var propdto = _mapper.Map<property, PropertyDTo>(prop);
+                var imgaesdto = _mapper.Map<List<property_images>, List<PropertyImagesDto>>(propimages);
+                propertyWithImageDtos.Add(new PropertyWithImageDto {PropertyDTo= propdto, propertiesimages= imgaesdto });
+           }
+            return Ok(propertyWithImageDtos);           
+        }
+        
 
 
     }

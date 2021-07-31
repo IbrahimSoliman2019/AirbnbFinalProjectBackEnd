@@ -36,6 +36,9 @@ namespace Api.Helpers
             //
             CreateMap<PropertyImagesDto,property_images>().ReverseMap();
             CreateMap<PropertyAmenitiesDto,property_amenities>().ReverseMap();
+            //create map review
+            CreateMap<PropertyReviewsDto, property_reviews>();
+            CreateMap<property_reviews, PropertyReviewsDto>().ForMember(d => d.UserName, o => o.MapFrom(s => s.User.UserName));
 
         }
 

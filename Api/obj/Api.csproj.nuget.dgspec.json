@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Private\\Study\\ITI\\Final Project\\Api\\AirbnbFinalProjectBackEnd\\api\\Api.csproj": {}
+    "C:\\Users\\waleed\\source\\repos\\FinelProjectITI\\AirbnbFinalProjectBackEnd\\api\\Api.csproj": {}
   },
   "projects": {
-    "E:\\Private\\Study\\ITI\\Final Project\\Api\\AirbnbFinalProjectBackEnd\\api\\Api.csproj": {
+    "C:\\Users\\waleed\\source\\repos\\FinelProjectITI\\AirbnbFinalProjectBackEnd\\api\\Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Private\\Study\\ITI\\Final Project\\Api\\AirbnbFinalProjectBackEnd\\api\\Api.csproj",
+        "projectUniqueName": "C:\\Users\\waleed\\source\\repos\\FinelProjectITI\\AirbnbFinalProjectBackEnd\\api\\Api.csproj",
         "projectName": "Api",
-        "projectPath": "E:\\Private\\Study\\ITI\\Final Project\\Api\\AirbnbFinalProjectBackEnd\\api\\Api.csproj",
-        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-        "outputPath": "E:\\Private\\Study\\ITI\\Final Project\\Api\\AirbnbFinalProjectBackEnd\\api\\obj\\",
+        "projectPath": "C:\\Users\\waleed\\source\\repos\\FinelProjectITI\\AirbnbFinalProjectBackEnd\\api\\Api.csproj",
+        "packagesPath": "C:\\Users\\waleed\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\waleed\\source\\repos\\FinelProjectITI\\AirbnbFinalProjectBackEnd\\api\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\waleed\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -32,11 +28,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "E:\\Private\\Study\\ITI\\Final Project\\Api\\AirbnbFinalProjectBackEnd\\Domain\\Domain.csproj": {
-                "projectPath": "E:\\Private\\Study\\ITI\\Final Project\\Api\\AirbnbFinalProjectBackEnd\\Domain\\Domain.csproj"
+              "C:\\Users\\waleed\\source\\repos\\FinelProjectITI\\AirbnbFinalProjectBackEnd\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\waleed\\source\\repos\\FinelProjectITI\\AirbnbFinalProjectBackEnd\\Domain\\Domain.csproj"
               },
-              "E:\\Private\\Study\\ITI\\Final Project\\Api\\AirbnbFinalProjectBackEnd\\Infrastructure\\Infrastructure.csproj": {
-                "projectPath": "E:\\Private\\Study\\ITI\\Final Project\\Api\\AirbnbFinalProjectBackEnd\\Infrastructure\\Infrastructure.csproj"
+              "C:\\Users\\waleed\\source\\repos\\FinelProjectITI\\AirbnbFinalProjectBackEnd\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\waleed\\source\\repos\\FinelProjectITI\\AirbnbFinalProjectBackEnd\\Infrastructure\\Infrastructure.csproj"
               }
             }
           }
@@ -69,6 +65,16 @@
               "target": "Package",
               "version": "[5.0.8, )"
             },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.8, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.1.4, )"
@@ -96,21 +102,17 @@
         }
       }
     },
-    "E:\\Private\\Study\\ITI\\Final Project\\Api\\AirbnbFinalProjectBackEnd\\Domain\\Domain.csproj": {
+    "C:\\Users\\waleed\\source\\repos\\FinelProjectITI\\AirbnbFinalProjectBackEnd\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Private\\Study\\ITI\\Final Project\\Api\\AirbnbFinalProjectBackEnd\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\waleed\\source\\repos\\FinelProjectITI\\AirbnbFinalProjectBackEnd\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "E:\\Private\\Study\\ITI\\Final Project\\Api\\AirbnbFinalProjectBackEnd\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-        "outputPath": "E:\\Private\\Study\\ITI\\Final Project\\Api\\AirbnbFinalProjectBackEnd\\Domain\\obj\\",
+        "projectPath": "C:\\Users\\waleed\\source\\repos\\FinelProjectITI\\AirbnbFinalProjectBackEnd\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\waleed\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\waleed\\source\\repos\\FinelProjectITI\\AirbnbFinalProjectBackEnd\\Domain\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\waleed\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -160,21 +162,17 @@
         }
       }
     },
-    "E:\\Private\\Study\\ITI\\Final Project\\Api\\AirbnbFinalProjectBackEnd\\Infrastructure\\Infrastructure.csproj": {
+    "C:\\Users\\waleed\\source\\repos\\FinelProjectITI\\AirbnbFinalProjectBackEnd\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Private\\Study\\ITI\\Final Project\\Api\\AirbnbFinalProjectBackEnd\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\waleed\\source\\repos\\FinelProjectITI\\AirbnbFinalProjectBackEnd\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "E:\\Private\\Study\\ITI\\Final Project\\Api\\AirbnbFinalProjectBackEnd\\Infrastructure\\Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-        "outputPath": "E:\\Private\\Study\\ITI\\Final Project\\Api\\AirbnbFinalProjectBackEnd\\Infrastructure\\obj\\",
+        "projectPath": "C:\\Users\\waleed\\source\\repos\\FinelProjectITI\\AirbnbFinalProjectBackEnd\\Infrastructure\\Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\waleed\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\waleed\\source\\repos\\FinelProjectITI\\AirbnbFinalProjectBackEnd\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\waleed\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -188,8 +186,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "E:\\Private\\Study\\ITI\\Final Project\\Api\\AirbnbFinalProjectBackEnd\\Domain\\Domain.csproj": {
-                "projectPath": "E:\\Private\\Study\\ITI\\Final Project\\Api\\AirbnbFinalProjectBackEnd\\Domain\\Domain.csproj"
+              "C:\\Users\\waleed\\source\\repos\\FinelProjectITI\\AirbnbFinalProjectBackEnd\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\waleed\\source\\repos\\FinelProjectITI\\AirbnbFinalProjectBackEnd\\Domain\\Domain.csproj"
               }
             }
           }

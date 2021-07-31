@@ -6,6 +6,7 @@ namespace Api.DTOS
         public string comment { get; set; }
         public int rating { get; set; }
         public string image { get; set; }
-    
+        public string UserName { get; set; }
+
     }
 }

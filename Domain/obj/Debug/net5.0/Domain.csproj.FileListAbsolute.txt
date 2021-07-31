@@ -22,3 +22,15 @@ E:\Private\Study\ITI\Final Project\Api\AirbnbFinalProjectBackEnd\Domain\obj\Debu
 E:\Private\Study\ITI\Final Project\Api\AirbnbFinalProjectBackEnd\Domain\obj\Debug\net5.0\Domain.dll
 E:\Private\Study\ITI\Final Project\Api\AirbnbFinalProjectBackEnd\Domain\obj\Debug\net5.0\ref\Domain.dll
 E:\Private\Study\ITI\Final Project\Api\AirbnbFinalProjectBackEnd\Domain\obj\Debug\net5.0\Domain.pdb
+C:\Users\waleed\source\repos\FinelProjectITI\AirbnbFinalProjectBackEnd\Domain\obj\Debug\net5.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\waleed\source\repos\FinelProjectITI\AirbnbFinalProjectBackEnd\Domain\obj\Debug\net5.0\Domain.AssemblyInfoInputs.cache
+C:\Users\waleed\source\repos\FinelProjectITI\AirbnbFinalProjectBackEnd\Domain\obj\Debug\net5.0\Domain.AssemblyInfo.cs
+C:\Users\waleed\source\repos\FinelProjectITI\AirbnbFinalProjectBackEnd\Domain\obj\Debug\net5.0\Domain.csproj.CoreCompileInputs.cache
+C:\Users\waleed\source\repos\FinelProjectITI\AirbnbFinalProjectBackEnd\Domain\obj\Debug\net5.0\Domain.dll
+C:\Users\waleed\source\repos\FinelProjectITI\AirbnbFinalProjectBackEnd\Domain\obj\Debug\net5.0\ref\Domain.dll
+C:\Users\waleed\source\repos\FinelProjectITI\AirbnbFinalProjectBackEnd\Domain\obj\Debug\net5.0\Domain.pdb
+C:\Users\waleed\source\repos\FinelProjectITI\AirbnbFinalProjectBackEnd\Domain\bin\Debug\net5.0\Domain.deps.json
+C:\Users\waleed\source\repos\FinelProjectITI\AirbnbFinalProjectBackEnd\Domain\bin\Debug\net5.0\Domain.dll
+C:\Users\waleed\source\repos\FinelProjectITI\AirbnbFinalProjectBackEnd\Domain\bin\Debug\net5.0\ref\Domain.dll
+C:\Users\waleed\source\repos\FinelProjectITI\AirbnbFinalProjectBackEnd\Domain\bin\Debug\net5.0\Domain.pdb
+C:\Users\waleed\source\repos\FinelProjectITI\AirbnbFinalProjectBackEnd\Domain\obj\Debug\net5.0\Domain.csproj.AssemblyReference.cache
