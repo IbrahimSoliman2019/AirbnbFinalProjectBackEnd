@@ -5526,19 +5526,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\waleed\\.nuget\\packages\\": {}
+    "C:\\Users\\eng ebraheem\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\waleed\\source\\repos\\FinelProjectITI\\AirbnbFinalProjectBackEnd\\Infrastructure\\Infrastructure.csproj",
+      "projectUniqueName": "F:\\airbnb 1-8-2021\\AirbnbFinalProjectBackEnd\\Infrastructure\\Infrastructure.csproj",
       "projectName": "Infrastructure",
-      "projectPath": "C:\\Users\\waleed\\source\\repos\\FinelProjectITI\\AirbnbFinalProjectBackEnd\\Infrastructure\\Infrastructure.csproj",
-      "packagesPath": "C:\\Users\\waleed\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\waleed\\source\\repos\\FinelProjectITI\\AirbnbFinalProjectBackEnd\\Infrastructure\\obj\\",
+      "projectPath": "F:\\airbnb 1-8-2021\\AirbnbFinalProjectBackEnd\\Infrastructure\\Infrastructure.csproj",
+      "packagesPath": "C:\\Users\\eng ebraheem\\.nuget\\packages\\",
+      "outputPath": "F:\\airbnb 1-8-2021\\AirbnbFinalProjectBackEnd\\Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\waleed\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\eng ebraheem\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5552,8 +5552,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\waleed\\source\\repos\\FinelProjectITI\\AirbnbFinalProjectBackEnd\\Domain\\Domain.csproj": {
-              "projectPath": "C:\\Users\\waleed\\source\\repos\\FinelProjectITI\\AirbnbFinalProjectBackEnd\\Domain\\Domain.csproj"
+            "F:\\airbnb 1-8-2021\\AirbnbFinalProjectBackEnd\\Domain\\Domain.csproj": {
+              "projectPath": "F:\\airbnb 1-8-2021\\AirbnbFinalProjectBackEnd\\Domain\\Domain.csproj"
             }
           }
         }
@@ -5604,7 +5604,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
       }
     }
   }

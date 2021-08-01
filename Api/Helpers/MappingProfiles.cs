@@ -12,10 +12,7 @@ namespace Api.Helpers
             MapProperty();
             MapPropertyDto();
 
-            // Booking
-            CreateMap<Booking, BookingDTO>()
-            .ForMember(d=>d.transaction,o=>o.MapFrom(s=>s.transaction))
-            .ReverseMap();
+            
             //User
             CreateMap<ApplicationUser,UserDto>().ReverseMap();
             //Transaction
@@ -38,7 +35,7 @@ namespace Api.Helpers
             CreateMap<PropertyAmenitiesDto,property_amenities>().ReverseMap();
             //create map review
             CreateMap<PropertyReviewsDto, property_reviews>();
-            CreateMap<property_reviews, PropertyReviewsDto>().ForMember(d => d.UserName, o => o.MapFrom(s => s.User.UserName));
+            CreateMap<property_reviews, PropertyReviewsDto>().ForMember(d => d.UserName, o => o.MapFrom(s => s.User.DisplayName));
 
         }
 

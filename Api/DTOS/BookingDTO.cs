@@ -8,6 +8,8 @@ namespace Api.DTOS
     public class BookingDTO
     {
          public int Id { get; set; }
+         
+
         public DateTime check_in_date { get; set; }
         public DateTime check_out_date { get; set; }
         public decimal price_per_day { get; set; }
@@ -22,10 +24,10 @@ namespace Api.DTOS
         public decimal effective_amount { get; set; }
         
     
-        public  PropertyDTo property { get; set; }
         
-        public  UserDto User { get; set; }
+        
+        
 
-        public  TransactionDto transaction { get; set; }
+        
     }
 }

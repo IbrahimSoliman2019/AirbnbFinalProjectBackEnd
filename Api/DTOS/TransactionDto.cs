@@ -26,7 +26,6 @@ namespace Api.DTOS
 
 
 
-        public UserDto Recevier { get; set; }
-        public UserDto payee { get; set; }
+        
     }
 }

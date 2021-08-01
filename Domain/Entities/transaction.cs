@@ -9,8 +9,16 @@ namespace Domain.Entities
     
     public  class transaction : BaseEntity
     {
+        public transaction()
+        {
+            Booking = new Booking();
+            currency = new currency();
+            promo_codes = new promo_codes();
+            property = new property();
+            payee = new ApplicationUser();
+            Recevier = new ApplicationUser();
+        }
 
-    
         public int id { get; set; }
         [ForeignKey("property")]
         public Nullable<int> property_id { get; set; }
