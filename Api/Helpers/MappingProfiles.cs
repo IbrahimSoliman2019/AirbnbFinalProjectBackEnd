@@ -34,11 +34,12 @@ namespace Api.Helpers
             //propertyPosting
             CreateMap<PropertyDTo, property>();
             //
-            CreateMap<PropertyImagesDto,property_images>().ReverseMap();
+            CreateMap<PropertyImagesDto,property_images>();
+            CreateMap<property_images, PropertyImagesDto>().ForMember(d=>d.image,o=>o.MapFrom<propertyImagerResolver>());
             CreateMap<PropertyAmenitiesDto,property_amenities>().ReverseMap();
             //create map review
             CreateMap<PropertyReviewsDto, property_reviews>();
-            CreateMap<property_reviews, PropertyReviewsDto>().ForMember(d => d.UserName, o => o.MapFrom(s => s.User.UserName));
+            CreateMap<property_reviews, PropertyReviewsDto>().ForMember(d => d.UserName, o => o.MapFrom(s => s.User.DisplayName));
 
         }
 

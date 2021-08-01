@@ -1,3 +1,5 @@
+using System;
+
 namespace Api.DTOS
 {
     public class PropertyReviewsDto
@@ -7,6 +9,7 @@ namespace Api.DTOS
         public int rating { get; set; }
         public string image { get; set; }
         public string UserName { get; set; }
-
+       public string DateTime { get; set; }
+        public Nullable<DateTime> created { get; set; }
     }
 }
