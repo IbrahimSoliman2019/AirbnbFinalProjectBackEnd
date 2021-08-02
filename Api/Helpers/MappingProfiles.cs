@@ -41,6 +41,11 @@ namespace Api.Helpers
             CreateMap<PropertyReviewsDto, property_reviews>();
             CreateMap<property_reviews, PropertyReviewsDto>().ForMember(d => d.UserName, o => o.MapFrom(s => s.User.DisplayName));
 
+
+
+            //////Create State Image 
+            CreateMap<state, StateDTO>().ForMember(d => d.PictureUrl, o => o.MapFrom<StateImageResolver>());
+            CreateMap< StateDTO, state>();
         }
 
         public void MapProperty()
