@@ -80,15 +80,24 @@ namespace Api.Controllers
 
         public async Task<ActionResult<PropertyDetailsDto>> GetProperty(int id)
         {
-            var property = context.Properties.Include(x => x.property_reviews).Include(x => x.property_images)
+            var property = context.Properties.Include(x => x.property_reviews).Include(x => x.property_images).Include(x=>x.User)
             .Include(x => x.property_amenities).FirstOrDefault(x => x.id == id);
             var proptyreviews = property.property_reviews.ToList();
             var propertyimages = property.property_images.ToList();
+            var propertyreviewsmapped = _mapper.Map<List<property_reviews>, List<PropertyReviewsDto>>(proptyreviews);
 
+            //var userName = property.User.UserName;
+            //foreach (var propertyrevierw in proptyreviews)
+            //{
+            //    var user = propertyrevierw.User.UserName;
+                
+
+            //}
+
+         //   var propreviewsUser = proptyreviews.Select(x => x.User.DisplayName);
             var propertyAmenit = property.property_amenities.ToList().Select(x => x.amenity).ToList();
             if (property == null) return NotFound(new ApiErrorResponse(404));
             var propertymapped = _mapper.Map<property, PropertyDTo>(property);
-            var propertyreviewsmapped = _mapper.Map<List<property_reviews>, List<PropertyReviewsDto>>(proptyreviews);
             var propertyimagesmapped = _mapper.Map<List<property_images>, List<PropertyImagesDto>>(propertyimages);
             var AmenitesMap = _mapper.Map<List<amenity>, List<AmenityDto>>(propertyAmenit);
             var propdetails = new PropertyDetailsDto
@@ -178,7 +187,7 @@ namespace Api.Controllers
             return Ok(propertyWithImageDtos);           
         }
 
-        [HttpPost]
+        [HttpPost("review")]
         [Authorize]
         public async Task<ActionResult<PropertyReviewsDto>> PostPropertyreview(PropertyReviewPostingDto propertyReviewPostingDto)
         {

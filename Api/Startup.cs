@@ -59,7 +59,7 @@ namespace Api
 
             app.UseHttpsRedirection();
 
-
+            app.UseStaticFiles();
             app.UseRouting();
             app.UseCors(MyAllowSpecificOrigins);
 
@@ -68,7 +68,7 @@ namespace Api
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseSwaggerSettings();
-
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
