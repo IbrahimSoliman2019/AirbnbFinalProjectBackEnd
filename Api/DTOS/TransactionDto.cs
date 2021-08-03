@@ -22,11 +22,6 @@ namespace Api.DTOS
         
 
 
-        public PromoCodesDto promo_codes { get; set; }
-
-
-
-        public UserDto Recevier { get; set; }
-        public UserDto payee { get; set; }
+      
     }
 }

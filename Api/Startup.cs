@@ -33,7 +33,7 @@ namespace Api
             {
                 opt.UseSqlServer(Configuration.GetConnectionString("Default")).EnableSensitiveDataLogging();
             });
-            services.AddIdentity<ApplicationUser, ApplicationRole>().AddEntityFrameworkStores<ApplicationContext>();
+            services.AddIdentityService(Configuration);
             services.AddCors(Opt =>
             {
                 Opt.AddPolicy("CorsPolicy", policy =>
@@ -44,6 +44,7 @@ namespace Api
             services.AddControllers();
             services.AddApplicationServices();
             services.AddSwaggerSetting();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,7 +61,7 @@ namespace Api
 
 
             app.UseCors("CorsPolicy");
-
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseSwaggerSettings();
             

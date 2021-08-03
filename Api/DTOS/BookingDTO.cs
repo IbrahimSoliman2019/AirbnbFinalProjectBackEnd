@@ -22,10 +22,5 @@ namespace Api.DTOS
         public decimal effective_amount { get; set; }
         
     
-        public  PropertyDTo property { get; set; }
-        
-        public  UserDto User { get; set; }
-
-        public  TransactionDto transaction { get; set; }
     }
 }

@@ -1,73 +1,86 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Api.ApplictionExtentions;
 using Api.DTOS;
+using Api.Helpers;
 using AutoMapper;
 using Domain.Entities;
-using Domain.EntitiesSpecification.Bookingspec;
-using Domain.EntitiesSpecification.TransactionSpec;
-using Domain.Interfaces;
+
+using Domain.IdentityEntities;
+
+using Infrastructure.Data;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Api.Controllers
 {
     public class ReservationController : ApiBaseController
     {
-        private readonly IGenericRepo<Booking> _bookingrepo;
-
-        private readonly IGenericRepo<transaction> _transactionrepo;
-
+        private readonly ApplicationContext context;
         private readonly IMapper _mapper;
+        private readonly UserManager<ApplicationUser> userManager;
 
         public ReservationController(
-            IGenericRepo<Booking> bookingrepo,
-            IGenericRepo<transaction> transactionrepo,
-            IMapper mapper
-        )
+       ApplicationContext context,
+       IMapper mapper,
+       UserManager<ApplicationUser> userManager
+       )
         {
+            this.context = context;
             _mapper = mapper;
-            _transactionrepo = transactionrepo;
-            _bookingrepo = bookingrepo;
+            this.userManager = userManager;
         }
 
-        [HttpGet("bookings/{id}")]
-        public async Task<ActionResult<List<BookingDTO>>> GetBookings(int id)
+        [HttpPost]
+        [Authorize]
+        public async Task<ActionResult<BookingDTO>> Reserve(ResevationDto resevationDto)
         {
-            var spec = new BookingSpecification(id);
-            var bookings = await _bookingrepo.ListAllBySpec(spec);
+            var result = await new MakePayment().PayAsync(resevationDto.paymentDto);
+            if (result == "success")
+            {
+                var prop = await context.Properties.Include(x => x.User).FirstOrDefaultAsync(x => x.id == resevationDto.propertyId);
+                var mappedBooking =
+                _mapper.Map<BookingDTO, Booking>(resevationDto.bookingDTO);
+                var mappedtransaction =
+                _mapper.Map<TransactionDto, transaction>(resevationDto.transactionDto);
+                mappedBooking.transaction = mappedtransaction;
+                mappedtransaction.payee = prop.User;
+                mappedtransaction.Recevier = await userManager.FindByEmailFromClaimsPrinciples(HttpContext.User);
+                prop.Bookings.Add(mappedBooking);
+                prop.transactions.Add(mappedtransaction);
+                await context.SaveChangesAsync();
+
+                return Ok(resevationDto.bookingDTO);
+
+            }
+            return BadRequest("Your Card information is not correct");
+        }
+
+        [HttpGet("bookings/{propertyid}")]
+        public async Task<ActionResult<List<BookingDTO>>> GetBookings(int propertyid)
+        {
+
+            var bookings = await context.Bookings.Where(x => x.properity_id == propertyid).ToListAsync();
             var mapped =
-                _mapper.Map<IReadOnlyList<Booking>, List<BookingDTO>>(bookings);
+            _mapper.Map<IReadOnlyList<Booking>, List<BookingDTO>>(bookings);
             return Ok(mapped);
         }
 
-        [HttpGet("transaction/{id}")]
+        [HttpGet("transaction/{propertyid}")]
         public async Task<ActionResult<List<TransactionDto>>>
-        Gettransactions(int id)
+       Gettransactions(int propertyid)
         {
-            var spec = new TransactionSpecification(id);
-            var transactions = await _transactionrepo.ListAllBySpec(spec);
+            var transactions = await context.Transactions.Where(x => x.property.id == propertyid).ToListAsync();
             var mapped =
-                _mapper
-                    .Map
-                    <IReadOnlyList<transaction>, List<TransactionDto>
-                    >(transactions);
+            _mapper
+            .Map
+            <IReadOnlyList<transaction>, List<TransactionDto>
+            >(transactions);
             return Ok(mapped);
         }
 
-        [HttpPost("booking")]
-        public async Task<ActionResult<BookingDTO>>
-        PostBooking(BookingDTO booking)
-        {
-            var Booking = _mapper.Map<BookingDTO, Booking>(booking);
-            var obj = await _bookingrepo.AddAsync(Booking);
-            return Ok(_mapper.Map<Booking, BookingDTO>(obj));
-        }
-         [HttpPost("transaction")]
-        public async Task<ActionResult<TransactionDto>>
-        PostTransaction(TransactionDto transaction)
-        {
-            var Transaction = _mapper.Map<TransactionDto, transaction>(transaction);
-            var obj = await _transactionrepo.AddAsync(Transaction);
-            return Ok(_mapper.Map<transaction, TransactionDto>(obj));
-        }
     }
 }

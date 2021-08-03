@@ -9,7 +9,15 @@ namespace Domain.Entities
     
     public  class transaction : BaseEntity
     {
+        public transaction()
+        {
+            property = new property();
+            payee = new ApplicationUser();
+            Recevier = new ApplicationUser();
+            currency = new currency();
+            promo_codes = new promo_codes();
 
+    }
     
         public int id { get; set; }
         [ForeignKey("property")]

@@ -14,7 +14,6 @@ namespace Domain.Entities
         {
             property = new property();
             User = new ApplicationUser();
-            transaction = new transaction();
             property_reviews = new HashSet<property_reviews>();
         }
 

@@ -41,7 +41,7 @@ namespace Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<Pagination<PropertyDTo>>>
+        public async Task<ActionResult<Pagination<PropertyWithImageDto>>>
         GetProperties([FromQuery]PropertySpecParams specParams)
         {
             var spec = new PropertySpecwithFiltersAndIncludes(specParams);
@@ -55,10 +55,19 @@ namespace Api.Controllers
                 _mapper
                     .Map
                     <List<property>, List<PropertyDTo>>(propertiesfiltered);
-            return Ok(new Pagination<PropertyDTo>(specParams.PageIndex,
+            List<PropertyWithImageDto> propertyWithImageDtos = new List<PropertyWithImageDto>();
+            foreach (var prop in propertiesfiltered)
+            {
+                var propimages = prop.property_images.ToList();
+                var propdto = _mapper.Map<property, PropertyDTo>(prop);
+                var imgaesdto = _mapper.Map<List<property_images>, List<PropertyImagesDto>>(propimages);
+                propertyWithImageDtos.Add(new PropertyWithImageDto { PropertyDTo = propdto, propertiesimages = imgaesdto });
+            }
+
+            return Ok(new Pagination<PropertyWithImageDto>(specParams.PageIndex,
                 specParams.PageSize,
                  propcounted.Count(),
-                data));
+                propertyWithImageDtos));
         }
 
 
@@ -69,6 +78,8 @@ namespace Api.Controllers
                  (!specParams.NumOfBedrooms.HasValue || x.bedroom_count == specParams.NumOfBedrooms) &&
                 (!specParams.StateId.HasValue || x.state_id == specParams.StateId) &&
                  (!specParams.NumOfBedrooms.HasValue || x.bedroom_count == specParams.NumOfBedrooms) &&
+                (!specParams.Price.HasValue || x.price <= specParams.Price) &&
+
                  (specParams.Amenities == null ||  x.property_amenities.Select(s => s.amenity).Select(s => s.name).ToList().All(specParams.Amenities.Contains) &&  x.property_amenities.Select(s => s.amenity).Select(s => s.name).ToList().Count == specParams.Amenities.Count) &&
                  (string.IsNullOrEmpty(specParams.PropertyType) || x.property_tybe.name == specParams.PropertyType)).ToList();
 

@@ -14,7 +14,6 @@ namespace Api.Helpers
 
             // Booking
             CreateMap<Booking, BookingDTO>()
-            .ForMember(d=>d.transaction,o=>o.MapFrom(s=>s.transaction))
             .ReverseMap();
             //User
             CreateMap<ApplicationUser,UserDto>().ReverseMap();
