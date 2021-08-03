@@ -13,7 +13,7 @@ namespace Api.Helpers
         {
             try
             {
-                StripeConfiguration.ApiKey = "";
+                StripeConfiguration.ApiKey = "sk_test_51JHfzoFT1lPmToeXo0ci8XPDFAOvwG9LFvWyh34XhAevRPMksXBalUdgzxON2GRueGsdAGVq4lQzd5nfGsBZSrxa00dyukPFsF";
 
                 var options = new TokenCreateOptions
                 {

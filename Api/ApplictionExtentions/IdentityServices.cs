@@ -24,9 +24,9 @@ namespace Api.ApplictionExtentions
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Token:Key"])),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("super key trying it")),
                     ValidateIssuer=true,
-                    ValidIssuer = config["Token:Issuer"],
+                    ValidIssuer = "https://localhost:44351",
                     ValidateAudience=false
 
 

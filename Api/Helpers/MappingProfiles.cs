@@ -12,7 +12,8 @@ namespace Api.Helpers
             MapProperty();
             MapPropertyDto();
 
-            
+            //booking
+            CreateMap<BookingDTO, Booking>().ReverseMap();
             //User
             CreateMap<ApplicationUser,UserDto>().ReverseMap();
             //Transaction

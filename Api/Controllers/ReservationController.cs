@@ -1,15 +1,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Api.ApplictionExtentions;
 using Api.DTOS;
 using Api.Helpers;
 using AutoMapper;
 using Domain.Entities;
-using Domain.EntitiesSpecification.Bookingspec;
-using Domain.EntitiesSpecification.TransactionSpec;
+
 using Domain.IdentityEntities;
-using Domain.Interfaces;
+
 using Infrastructure.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -34,19 +35,20 @@ namespace Api.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<BookingDTO>> Reserve(ResevationDto resevationDto)
         {
             var result = await new MakePayment().PayAsync(resevationDto.paymentDto);
-            if (result == "Success")
+            if (result == "success")
             {
-                var prop =await context.Properties.FindAsync(resevationDto.propertyId);
+                var prop =await context.Properties.Include(x=>x.User).FirstOrDefaultAsync(x=>x.id==resevationDto.propertyId);
                 var mappedBooking =
               _mapper.Map< BookingDTO, Booking>(resevationDto.bookingDTO);
                 var mappedtransaction =
              _mapper.Map<TransactionDto, transaction>(resevationDto.transactionDto);
                 mappedBooking.transaction = mappedtransaction;
                 mappedtransaction.payee = prop.User;
-                mappedtransaction.Recevier =await userManager.FindByEmailAsync( resevationDto.User.Email);
+                mappedtransaction.Recevier = await userManager.FindByEmailFromClaimsPrinciples(HttpContext.User);
                 prop.Bookings.Add(mappedBooking);
                 prop.transactions.Add(mappedtransaction);
                await context.SaveChangesAsync();

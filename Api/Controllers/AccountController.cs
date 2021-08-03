@@ -22,8 +22,9 @@ namespace Api.Controllers
             _signInManager = signInManager;
             _userManager = userManager;
         }
-        [Authorize]
+
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
 
@@ -35,6 +36,12 @@ namespace Api.Controllers
                 Token = _tokenService.CreateToken(user)
             };
 
+        }
+        [HttpGet("auth")]
+        [Authorize]
+        public string isauth()
+        {
+            return "Authorized";
         }
 
         [HttpGet("emailexists")]

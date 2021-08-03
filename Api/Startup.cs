@@ -8,6 +8,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Api.ApplictionExtentions;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace Api
 {
@@ -33,7 +37,8 @@ namespace Api
             {
                 opt.UseSqlServer(Configuration.GetConnectionString("Default")).EnableSensitiveDataLogging();
             });
-            services.AddIdentity<ApplicationUser, ApplicationRole>().AddEntityFrameworkStores<ApplicationContext>();
+              services.AddIdentityService(Configuration);
+   
             services.AddCors(Opt =>
             {
                 Opt.AddPolicy("CorsPolicy", policy =>
@@ -41,7 +46,7 @@ namespace Api
                     policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("https://localhost:4200");
                 });
             });
-            services.AddControllers();
+            services.AddMvc();
             services.AddApplicationServices();
             services.AddSwaggerSetting();
         }
@@ -60,7 +65,7 @@ namespace Api
 
 
             app.UseCors("CorsPolicy");
-
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseSwaggerSettings();
 

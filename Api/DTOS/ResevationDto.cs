@@ -9,7 +9,7 @@ namespace Api.DTOS
     {
         public int propertyId { get; set; }
         public PaymentDto paymentDto { get; set; }
-        public UserDto User { get; set; }
+       
         public BookingDTO bookingDTO { get; set; }
         public TransactionDto transactionDto { get; set; }
 

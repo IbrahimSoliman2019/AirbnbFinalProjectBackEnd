@@ -12,6 +12,7 @@ using Domain.EntitiesSpecification.Propertyspec;
 using Domain.IdentityEntities;
 using Domain.Interfaces;
 using Infrastructure.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -102,18 +103,7 @@ namespace Api.Controllers
         }
 
 
-        //[HttpGet("{id}")]
-        //[ProducesResponseType(typeof(ApiErrorResponse),StatusCodes.Status404NotFound)]
-
-        //public async Task<ActionResult<PropertyDTo>> GetProperty(int id)
-        //{
-        //    // var spec = new PropertySpecwithFiltersAndIncludes(id);
-        //    // var property = await _genericRepo.GetBySpec(spec);
-        //        var property = context.Properties.Find(id);
-        //    if(property==null) return NotFound(new ApiErrorResponse(404));
-        //    var data = _mapper.Map<property, PropertyDTo>(property);
-        //    return Ok(data);
-        //}
+      
         [HttpPost]
         public async Task<ActionResult<PropertyDTo>> PostProperty(PropertyDToPosting prop){
 
@@ -186,6 +176,23 @@ namespace Api.Controllers
                 propertyWithImageDtos.Add(new PropertyWithImageDto {PropertyDTo= propdto, propertiesimages= imgaesdto });
            }
             return Ok(propertyWithImageDtos);           
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<ActionResult<PropertyReviewsDto>> PostPropertyreview(PropertyReviewPostingDto propertyReviewPostingDto)
+        {
+              var reviewUser = await userManager.FindByEmailFromClaimsPrinciples(HttpContext.User);
+              var booking = context.Bookings.Include(x => x.property).Include(x => x.User).Where(x => x.properity_id == propertyReviewPostingDto.PropertyId && x.User == reviewUser && x.check_out_date > DateTime.Now).ToList();
+              if (booking != null)
+              {
+                 var propertyrevirewmapped = _mapper.Map<PropertyReviewsDto, property_reviews>(propertyReviewPostingDto.PropertyReviewsDto);
+                 await  context.Property_Reviews.AddAsync(propertyrevirewmapped);
+                 await  context.SaveChangesAsync();
+               }
+
+            return BadRequest(new ApiErrorResponse(400,"You must book the property and finsh the duration before leaving review "));
+              
         }
         
 
