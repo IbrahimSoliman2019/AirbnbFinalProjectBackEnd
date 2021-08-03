@@ -5526,19 +5526,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\waleed\\.nuget\\packages\\": {}
+    "C:\\Users\\DELL\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\waleed\\source\\repos\\FinelProjectITI\\AirbnbFinalProjectBackEnd\\Infrastructure\\Infrastructure.csproj",
+      "projectUniqueName": "E:\\Private\\Study\\ITI\\Final Project\\Api\\AirbnbFinalProjectBackEnd\\Infrastructure\\Infrastructure.csproj",
       "projectName": "Infrastructure",
-      "projectPath": "C:\\Users\\waleed\\source\\repos\\FinelProjectITI\\AirbnbFinalProjectBackEnd\\Infrastructure\\Infrastructure.csproj",
-      "packagesPath": "C:\\Users\\waleed\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\waleed\\source\\repos\\FinelProjectITI\\AirbnbFinalProjectBackEnd\\Infrastructure\\obj\\",
+      "projectPath": "E:\\Private\\Study\\ITI\\Final Project\\Api\\AirbnbFinalProjectBackEnd\\Infrastructure\\Infrastructure.csproj",
+      "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
+      "outputPath": "E:\\Private\\Study\\ITI\\Final Project\\Api\\AirbnbFinalProjectBackEnd\\Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\waleed\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5552,8 +5557,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\waleed\\source\\repos\\FinelProjectITI\\AirbnbFinalProjectBackEnd\\Domain\\Domain.csproj": {
-              "projectPath": "C:\\Users\\waleed\\source\\repos\\FinelProjectITI\\AirbnbFinalProjectBackEnd\\Domain\\Domain.csproj"
+            "E:\\Private\\Study\\ITI\\Final Project\\Api\\AirbnbFinalProjectBackEnd\\Domain\\Domain.csproj": {
+              "projectPath": "E:\\Private\\Study\\ITI\\Final Project\\Api\\AirbnbFinalProjectBackEnd\\Domain\\Domain.csproj"
             }
           }
         }

@@ -12,6 +12,7 @@ using Domain.EntitiesSpecification.Propertyspec;
 using Domain.IdentityEntities;
 using Domain.Interfaces;
 using Infrastructure.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -124,12 +125,14 @@ namespace Api.Controllers
         //    return Ok(data);
         //}
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<PropertyDTo>> PostProperty(PropertyDToPosting prop){
 
            
             var property = _mapper.Map<PropertyDTo, property>(prop.Propertydto);
             foreach (var item in prop.PropertyImages)
             {
+
                 var image = _mapper.Map<PropertyImagesDto, property_images>(item);
                 property.property_images.Add(image);
             }
