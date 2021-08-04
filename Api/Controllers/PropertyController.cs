@@ -50,7 +50,8 @@ namespace Api.Controllers
             var propcounted = FilTer(propertiesWithoutIncludes,specParams);
             var properties = await _genericRepo.ListAllBySpec(spec);
 
-            var propertiesfiltered = FilTer(properties,specParams);
+            //  var propertiesfiltered = FilTer(properties,specParams);
+             var propertiesfiltered = properties.Where(x=>(!specParams.StateId.HasValue || x.state_id == specParams.StateId)).ToList();
             var data =
                 _mapper
                     .Map
