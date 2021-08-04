@@ -15,11 +15,11 @@ namespace Api.DTOS
         public decimal tax_paid { get; set; }
         public decimal site_fees { get; set; }
         public decimal amount_paid { get; set; }
-        public bool is_refund { get; set; }
-        public DateTime cancel_date { get; set; }
-        public decimal refund_paid { get; set; }
+       // public bool is_refund { get; set; }
+     //   public DateTime cancel_date { get; set; }
+   //     public decimal refund_paid { get; set; }
  
-        public decimal effective_amount { get; set; }
+       // public decimal effective_amount { get; set; }
         
     
     }
