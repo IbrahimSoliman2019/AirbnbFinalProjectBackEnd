@@ -22,7 +22,7 @@ namespace Api.DTOS
         
 
 
-        public PromoCodesDto promo_codes { get; set; }
+        
 
 
 

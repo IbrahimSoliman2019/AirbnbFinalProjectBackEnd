@@ -10,6 +10,13 @@ namespace Domain.Entities
     
     public  class property_reviews : BaseEntity
     {
+        public property_reviews()
+        {
+            property = new property();
+            Booking = new Booking();
+            User = new ApplicationUser();
+        }
+
         public int id { get; set; }
         public string comment { get; set; }
         [Range(1,5)]

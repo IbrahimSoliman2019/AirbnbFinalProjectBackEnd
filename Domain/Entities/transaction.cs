@@ -11,7 +11,7 @@ namespace Domain.Entities
     {
         public transaction()
         {
-            Booking = new Booking();
+            
             currency = new currency();
             promo_codes = new promo_codes();
             property = new property();

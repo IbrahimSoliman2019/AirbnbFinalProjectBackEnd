@@ -1,8 +1,6 @@
 ﻿using Api.DTOS;
 using Stripe;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Api.Helpers
@@ -13,7 +11,7 @@ namespace Api.Helpers
         {
             try
             {
-                StripeConfiguration.ApiKey = "sk_test_51JHfzoFT1lPmToeXo0ci8XPDFAOvwG9LFvWyh34XhAevRPMksXBalUdgzxON2GRueGsdAGVq4lQzd5nfGsBZSrxa00dyukPFsF";
+                StripeConfiguration.ApiKey = "sk_test_51JItXSEUBM05k6sSesTbdCml0wcMIk26gCkDf0kVNZeYtZiBTnA3UJe8qcxrnoDCvRH3wIBiEfELquQK27eWbNq700dWURa1Qa";
 
                 var options = new TokenCreateOptions
                 {

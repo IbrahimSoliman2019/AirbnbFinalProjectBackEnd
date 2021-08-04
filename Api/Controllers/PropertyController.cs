@@ -86,15 +86,7 @@ namespace Api.Controllers
             var propertyimages = property.property_images.ToList();
             var propertyreviewsmapped = _mapper.Map<List<property_reviews>, List<PropertyReviewsDto>>(proptyreviews);
 
-            //var userName = property.User.UserName;
-            //foreach (var propertyrevierw in proptyreviews)
-            //{
-            //    var user = propertyrevierw.User.UserName;
-                
-
-            //}
-
-         //   var propreviewsUser = proptyreviews.Select(x => x.User.DisplayName);
+            
             var propertyAmenit = property.property_amenities.ToList().Select(x => x.amenity).ToList();
             if (property == null) return NotFound(new ApiErrorResponse(404));
             var propertymapped = _mapper.Map<property, PropertyDTo>(property);
@@ -196,8 +188,12 @@ namespace Api.Controllers
               if (booking != null)
               {
                  var propertyrevirewmapped = _mapper.Map<PropertyReviewsDto, property_reviews>(propertyReviewPostingDto.PropertyReviewsDto);
+                propertyrevirewmapped.property = context.Properties.Find(propertyReviewPostingDto.PropertyId);
+                propertyrevirewmapped.User = reviewUser;
+               
                  await  context.Property_Reviews.AddAsync(propertyrevirewmapped);
                  await  context.SaveChangesAsync();
+                return Ok(propertyReviewPostingDto.PropertyReviewsDto);
                }
 
             return BadRequest(new ApiErrorResponse(400,"You must book the property and finsh the duration before leaving review "));

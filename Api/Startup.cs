@@ -37,6 +37,7 @@ namespace Api
             {
                 opt.UseSqlServer(Configuration.GetConnectionString("Default")).EnableSensitiveDataLogging();
             });
+
               services.AddIdentityService(Configuration);
    
             services.AddCors(Opt =>

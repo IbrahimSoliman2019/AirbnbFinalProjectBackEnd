@@ -52,6 +52,8 @@ namespace Api.Controllers
                 prop.Bookings.Add(mappedBooking);
                 prop.transactions.Add(mappedtransaction);
                await context.SaveChangesAsync();
+
+                return Ok(resevationDto.bookingDTO);
                
 
             }
