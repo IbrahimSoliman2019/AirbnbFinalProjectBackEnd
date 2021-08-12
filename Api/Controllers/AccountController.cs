@@ -28,12 +28,14 @@ namespace Api.Controllers
         {
 
             var user = await _userManager.FindByEmailFromClaimsPrinciples(HttpContext.User);
+            if(user!=null)
             return new UserDto
             {
                 DisplayName = user.DisplayName,
                 Email = user.Email,
                 Token = _tokenService.CreateToken(user)
             };
+            return null;
 
         }
 

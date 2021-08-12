@@ -25,7 +25,7 @@ namespace Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<property_tybe>>> GetProperty_Tybes()
         {
-            return await _context.Property_Tybes.ToListAsync();
+            return await _context.Property_Tybes.Take(3).ToListAsync();
         }
 
         // GET: api/property_tybe/5

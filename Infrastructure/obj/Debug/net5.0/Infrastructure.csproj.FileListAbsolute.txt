@@ -43,3 +43,18 @@ C:\Users\waleed\source\repos\FinelProjectITI\AirbnbFinalProjectBackEnd\Infrastru
 C:\Users\waleed\source\repos\FinelProjectITI\AirbnbFinalProjectBackEnd\Infrastructure\obj\Debug\net5.0\Infrastructure.AssemblyInfo.cs
 C:\Users\waleed\source\repos\FinelProjectITI\AirbnbFinalProjectBackEnd\Infrastructure\obj\Debug\net5.0\Infrastructure.csproj.CoreCompileInputs.cache
 C:\Users\waleed\source\repos\FinelProjectITI\AirbnbFinalProjectBackEnd\Infrastructure\obj\Debug\net5.0\Infrastructure.csproj.CopyComplete
+E:\Private\Final Projet Last Edit\AirbnbFinalProjectBackEnd\Infrastructure\bin\Debug\net5.0\Infrastructure.deps.json
+E:\Private\Final Projet Last Edit\AirbnbFinalProjectBackEnd\Infrastructure\bin\Debug\net5.0\Infrastructure.dll
+E:\Private\Final Projet Last Edit\AirbnbFinalProjectBackEnd\Infrastructure\bin\Debug\net5.0\ref\Infrastructure.dll
+E:\Private\Final Projet Last Edit\AirbnbFinalProjectBackEnd\Infrastructure\bin\Debug\net5.0\Infrastructure.pdb
+E:\Private\Final Projet Last Edit\AirbnbFinalProjectBackEnd\Infrastructure\bin\Debug\net5.0\Domain.dll
+E:\Private\Final Projet Last Edit\AirbnbFinalProjectBackEnd\Infrastructure\bin\Debug\net5.0\Domain.pdb
+E:\Private\Final Projet Last Edit\AirbnbFinalProjectBackEnd\Infrastructure\obj\Debug\net5.0\Infrastructure.csproj.AssemblyReference.cache
+E:\Private\Final Projet Last Edit\AirbnbFinalProjectBackEnd\Infrastructure\obj\Debug\net5.0\Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+E:\Private\Final Projet Last Edit\AirbnbFinalProjectBackEnd\Infrastructure\obj\Debug\net5.0\Infrastructure.AssemblyInfoInputs.cache
+E:\Private\Final Projet Last Edit\AirbnbFinalProjectBackEnd\Infrastructure\obj\Debug\net5.0\Infrastructure.AssemblyInfo.cs
+E:\Private\Final Projet Last Edit\AirbnbFinalProjectBackEnd\Infrastructure\obj\Debug\net5.0\Infrastructure.csproj.CoreCompileInputs.cache
+E:\Private\Final Projet Last Edit\AirbnbFinalProjectBackEnd\Infrastructure\obj\Debug\net5.0\Infrastructure.csproj.CopyComplete
+E:\Private\Final Projet Last Edit\AirbnbFinalProjectBackEnd\Infrastructure\obj\Debug\net5.0\Infrastructure.dll
+E:\Private\Final Projet Last Edit\AirbnbFinalProjectBackEnd\Infrastructure\obj\Debug\net5.0\ref\Infrastructure.dll
+E:\Private\Final Projet Last Edit\AirbnbFinalProjectBackEnd\Infrastructure\obj\Debug\net5.0\Infrastructure.pdb

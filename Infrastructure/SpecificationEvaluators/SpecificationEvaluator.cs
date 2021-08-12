@@ -17,7 +17,7 @@ namespace Infrastructure.SpecificationEvaluators
            
             if (spec.Criteria != null)
             {
-                query.Where(spec.Criteria);
+              query =  query.Where(spec.Criteria);
             }
 
             if (spec.OrderBy != null)

@@ -6,6 +6,8 @@ namespace Domain.EntitiesSpecification.Propertyspec
     {
 
         public int PageIndex { get; set; }=1;
+        public string CityName { get; set; }
+
 
         private int _pageSize =6;
         private int _maxPageSize =50;

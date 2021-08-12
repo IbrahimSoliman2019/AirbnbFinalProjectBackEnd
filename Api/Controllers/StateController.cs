@@ -27,7 +27,7 @@ namespace Api.Controllers
         public async Task<ActionResult<List<StateDTO>>> GetStates([FromQuery]StateSpecParams specParams)
         {
             var states = context.States.Where(x => string.IsNullOrEmpty(specParams.Country)
-            || x.country.name == specParams.Country).OrderBy(x=>Guid.NewGuid())
+            || x.country.name == specParams.Country)
             .Take(6).ToList();
             
             var mapped = _mapper.Map<List<state>, List<StateDTO>>(states);

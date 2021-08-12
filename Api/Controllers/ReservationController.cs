@@ -46,6 +46,8 @@ namespace Api.Controllers
                 _mapper.Map<BookingDTO, Booking>(resevationDto.bookingDTO);
                 var mappedtransaction =
                 _mapper.Map<TransactionDto, transaction>(resevationDto.transactionDto);
+                mappedBooking.property = prop;
+                
                 mappedBooking.transaction = mappedtransaction;
                 mappedtransaction.payee = prop.User;
                 mappedtransaction.Recevier = await userManager.FindByEmailFromClaimsPrinciples(HttpContext.User);

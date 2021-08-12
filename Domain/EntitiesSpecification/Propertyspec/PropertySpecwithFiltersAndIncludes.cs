@@ -16,7 +16,9 @@ namespace Domain.EntitiesSpecification.Propertyspec
                  (!propertySpecParams.NumofBathrooms.HasValue || x.bathroom_count == propertySpecParams.NumofBathrooms) &&
                 (!propertySpecParams.NumOfBedrooms.HasValue || x.bedroom_count == propertySpecParams.NumOfBedrooms) &&
                 (!propertySpecParams.StateId.HasValue || x.state_id == propertySpecParams.StateId) &&
+                  (!propertySpecParams.Price.HasValue || x.price <= propertySpecParams.Price)&&
                 (propertySpecParams.Amenities == null || x.property_amenities.Select(x => x.amenity).Select(x => x.name).ToList().All(propertySpecParams.Amenities.Contains) && x.property_amenities.Select(x => x.amenity).Select(x => x.name).ToList().Count == propertySpecParams.Amenities.Count) &&
+                (string.IsNullOrEmpty(propertySpecParams.CityName) || x.City.name == propertySpecParams.CityName)&&
                 (string.IsNullOrEmpty(propertySpecParams.PropertyType) || x.property_tybe.name == propertySpecParams.PropertyType)
 
                 )

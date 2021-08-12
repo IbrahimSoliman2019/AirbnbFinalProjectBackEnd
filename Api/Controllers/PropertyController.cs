@@ -12,6 +12,7 @@ using Domain.EntitiesSpecification.Propertyspec;
 using Domain.IdentityEntities;
 using Domain.Interfaces;
 using Infrastructure.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -47,17 +48,17 @@ namespace Api.Controllers
             var spec = new PropertySpecwithFiltersAndIncludes(specParams);
             var specCount = new PropertySpecWithFilters(specParams);
             var propertiesWithoutIncludes = await _genericRepo.ListAllBySpec(specCount);
-            var propcounted = FilTer(propertiesWithoutIncludes,specParams);
+           // var propcounted = FilTer(propertiesWithoutIncludes,specParams);
             var properties = await _genericRepo.ListAllBySpec(spec);
 
-            //  var propertiesfiltered = FilTer(properties,specParams);
-             var propertiesfiltered = properties.Where(x=>(!specParams.StateId.HasValue || x.state_id == specParams.StateId)).ToList();
-            var data =
-                _mapper
-                    .Map
-                    <List<property>, List<PropertyDTo>>(propertiesfiltered);
+           // var propertiesfiltered = FilTer(properties, specParams);
+            //var propertiesfiltered = properties.Where(x=>(!specParams.StateId.HasValue || x.state_id == specParams.StateId)).ToList();
+           // var data =
+                //_mapper
+                //    .Map
+                //    <List<property>, List<PropertyDTo>>(propertiesfiltered);
             List<PropertyWithImageDto> propertyWithImageDtos = new List<PropertyWithImageDto>();
-            foreach (var prop in propertiesfiltered)
+            foreach (var prop in properties)
             {
                 var propimages = prop.property_images.ToList();
                 var propdto = _mapper.Map<property, PropertyDTo>(prop);
@@ -67,48 +68,55 @@ namespace Api.Controllers
 
             return Ok(new Pagination<PropertyWithImageDto>(specParams.PageIndex,
                 specParams.PageSize,
-                 propcounted.Count(),
+                 propertiesWithoutIncludes.Count(),
                 propertyWithImageDtos));
         }
 
 
 
-        private List<property> FilTer(IReadOnlyList<property> properties, PropertySpecParams specParams)
-        {
-            var filtered = properties.Where(  x=> (!specParams.NumOfBeds.HasValue || x.bed_count == specParams.NumOfBeds) &&
-                 (!specParams.NumOfBedrooms.HasValue || x.bedroom_count == specParams.NumOfBedrooms) &&
-                (!specParams.StateId.HasValue || x.state_id == specParams.StateId) &&
-                 (!specParams.NumOfBedrooms.HasValue || x.bedroom_count == specParams.NumOfBedrooms) &&
-                (!specParams.Price.HasValue || x.price <= specParams.Price) &&
+        //private List<property> FilTer(IReadOnlyList<property> properties, PropertySpecParams specParams)
+        //{
+        //    //var filtered = properties.Where(  x=> (!specParams.NumOfBeds.HasValue || x.bed_count == specParams.NumOfBeds) &&
+        //    //     (!specParams.NumOfBedrooms.HasValue || x.bedroom_count == specParams.NumOfBedrooms) &&
+        //    //    (!specParams.StateId.HasValue || x.state_id == specParams.StateId) &&
+        //    //     (!specParams.NumOfBedrooms.HasValue || x.bedroom_count == specParams.NumOfBedrooms) &&
+        //    //    (!specParams.Price.HasValue || x.price <= specParams.Price) &&
 
-                 (specParams.Amenities == null ||  x.property_amenities.Select(s => s.amenity).Select(s => s.name).ToList().All(specParams.Amenities.Contains) &&  x.property_amenities.Select(s => s.amenity).Select(s => s.name).ToList().Count == specParams.Amenities.Count) &&
-                 (string.IsNullOrEmpty(specParams.PropertyType) || x.property_tybe.name == specParams.PropertyType)).ToList();
+        //    //     (specParams.Amenities == null ||  x.property_amenities.Select(s => s.amenity).Select(s => s.name).ToList().All(specParams.Amenities.Contains) &&  x.property_amenities.Select(s => s.amenity).Select(s => s.name).ToList().Count == specParams.Amenities.Count) &&
+        //    //     (string.IsNullOrEmpty(specParams.PropertyType) || x.property_tybe.name == specParams.PropertyType)).ToList();
+        //    var filtered = properties.Where(x =>
+        //      (!specParams.StateId.HasValue || x.state_id == specParams.StateId) &&
+        //      (!specParams.Price.HasValue || x.price <= specParams.Price) &&
+        //      (string.IsNullOrEmpty(specParams.PropertyType) || x.property_tybe.name == specParams.PropertyType))
+        //        .ToList();
 
-                 return filtered;
-        }
+        //    return filtered;
+        //}
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status404NotFound)]
 
         public async Task<ActionResult<PropertyDetailsDto>> GetProperty(int id)
         {
-            var property = context.Properties.Include(x => x.property_reviews).Include(x => x.property_images).Include(x=>x.User)
+            var property = context.Properties.Include(x=>x.City).Include(x=>x.state
+            ).Include(x=>x.country).Include(x => x.property_reviews).Include(x => x.property_images).Include(x=>x.User)
             .Include(x => x.property_amenities).FirstOrDefault(x => x.id == id);
-            var proptyreviews = property.property_reviews.ToList();
+            var cityname = context.Cities.Find(property.city_id).name;
+            var countryname = context.Countries.Find(property.country_id).name;
+            var statename = context.States.Find(property.state_id).name;
+            var proptyreviews = context.Property_Reviews.Include(x => x.User)
+                .Where(x => x.property.id == id).ToList();
             var propertyimages = property.property_images.ToList();
             var propertyreviewsmapped = _mapper.Map<List<property_reviews>, List<PropertyReviewsDto>>(proptyreviews);
 
-            //var userName = property.User.UserName;
-            //foreach (var propertyrevierw in proptyreviews)
-            //{
-            //    var user = propertyrevierw.User.UserName;
-                
-
-            //}
-
-         //   var propreviewsUser = proptyreviews.Select(x => x.User.DisplayName);
+            
             var propertyAmenit = property.property_amenities.ToList().Select(x => x.amenity).ToList();
             if (property == null) return NotFound(new ApiErrorResponse(404));
             var propertymapped = _mapper.Map<property, PropertyDTo>(property);
+
+            propertymapped.CityName = cityname;
+            propertymapped.countryName = countryname;
+            propertymapped.stateName = statename;
+
             var propertyimagesmapped = _mapper.Map<List<property_images>, List<PropertyImagesDto>>(propertyimages);
             var AmenitesMap = _mapper.Map<List<amenity>, List<AmenityDto>>(propertyAmenit);
             var propdetails = new PropertyDetailsDto
@@ -136,6 +144,7 @@ namespace Api.Controllers
         //    return Ok(data);
         //}
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<PropertyDTo>> PostProperty(PropertyDToPosting prop){
 
            
@@ -179,7 +188,9 @@ namespace Api.Controllers
             {
                 property.state = state;
             }
-            if (!country.states.Contains(state))
+            var statecontained = country.states
+                .FirstOrDefault(x => x.name == state.name);
+            if (statecontained==null)
             {
                 country.states.Add(state);
                 context.SaveChanges();
@@ -208,7 +219,28 @@ namespace Api.Controllers
            }
             return Ok(propertyWithImageDtos);           
         }
-        
+
+
+
+        [HttpPost("review")]
+        [Authorize]
+        public async Task<ActionResult<PropertyReviewsDto>> PostPropertyreview(PropertyReviewPostingDto propertyReviewPostingDto)
+        {
+            var reviewUser = await userManager.FindByEmailFromClaimsPrinciples(HttpContext.User);
+            var booking = context.Bookings.Include(x => x.property).Include(x => x.User).Where(x => x.properity_id == propertyReviewPostingDto.PropertyId && x.User == reviewUser && x.check_out_date > DateTime.Now).ToList();
+            if (booking != null)
+            {
+                var propertyrevirewmapped = _mapper.Map<PropertyReviewsDto, property_reviews>(propertyReviewPostingDto.PropertyReviewsDto);
+                propertyrevirewmapped.property = context.Properties.Find(propertyReviewPostingDto.PropertyId);
+                propertyrevirewmapped.User = reviewUser;
+                await context.Property_Reviews.AddAsync(propertyrevirewmapped);
+                await context.SaveChangesAsync();
+                return Ok(propertyReviewPostingDto.PropertyReviewsDto);
+            }
+
+            return BadRequest(new ApiErrorResponse(400, "You must book the property and finsh the duration before leaving review "));
+        }
+
 
 
     }
